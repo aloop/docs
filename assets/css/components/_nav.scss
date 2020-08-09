@@ -1,0 +1,50 @@
+.Nav {
+  min-width: #{(250 / 16)}rem;
+  padding-right: var(--space);
+  font-size: #{(14 / 16)}rem;
+  line-height: 1.2;
+}
+
+.Nav-section {
+  margin: calc(var(--space) * 2) 0;
+}
+
+.Nav-section-title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: #{(12 / 16)}rem;
+  margin-bottom: var(--space);
+}
+
+.Nav-list {
+  list-style-type: none;
+
+  .Nav-list {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+}
+
+.Nav-list-item {
+  margin-bottom: calc(var(--space) / 2);
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.Nav-list-link {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  display: block;
+
+  &.is-current,
+  &:hover,
+  &:focus {
+    color: var(--nav-link-color-active);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-position: under;
+  }
+}

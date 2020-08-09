@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <article class="Content">
+    <h1 class="Content-title">{{ .Title }}</h1>
+
+    {{ .Content }}
+
+    {{- if gt (len .RegularPages) 0 }}
+    <ul>
+      {{- range .RegularPages -}}
+      <li class=''>
+        <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Name }}</a>
+        {{- if .Description -}}
+        <p>{{ .Description }}</p>
+        {{- end -}}
+      </li>
+      {{- end -}}
+    </ul>
+    {{- end -}}
+  </article>
+{{ end }}

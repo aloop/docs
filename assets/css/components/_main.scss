@@ -1,0 +1,5 @@
+.Main {
+  display: flex;
+  flex-direction: var(--main-layout, column-reverse);
+  margin: var(--main-margin);
+}

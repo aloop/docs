@@ -1,0 +1,24 @@
+.Content {
+  min-width: 17.5rem;
+  width: 100%;
+  max-width: var(--content-max-width, 100%);
+  background: var(--content-bg);
+  box-shadow: var(--content-box-shadow);
+  padding: var(--content-padding);
+  margin: var(--content-margin);
+  border-radius: 4px;
+}
+
+.Content p > code {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  border-radius: 5px;
+  padding-top: 0.2rem;
+  padding-bottom: 0.15rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+.Content-title {
+  color: var(--content-title-color);
+}

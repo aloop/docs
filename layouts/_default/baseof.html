@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4d33cc" />
+
+    {{- block "meta" . }}{{ end }}
+    <title>
+      {{- block "title" . }}
+        {{- if .IsHome }}
+          {{- .Site.Title -}}
+        {{ end }}
+        {{- if not .IsHome }}
+          {{- .Title }} - {{ .Site.Title -}}
+        {{ end -}}
+      {{ end -}}
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <!-- <link rel="apple-touch-icon" href="/images/icon-192.png"> -->
+
+    {{ $script := resources.Get "js/main.js" | js.Build (dict "minify" true) | fingerprint -}}
+    <script defer src="{{ $script.Permalink }}"></script>
+
+    {{ $style := resources.Get "css/styles.scss" | toCSS | minify | fingerprint -}}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+
+    {{- block "canonical" . }}
+      <link rel="canonical" href="{{ .Permalink }}">
+    {{ end -}}
+
+    {{ block "head" . }}{{ end }}
+  </head>
+  <body>
+    {{- with resources.Get "js/head-inline.js" | minify }}
+    <script>
+      {{ .Content | safeJS }}
+    </script>
+    {{ end -}}
+    {{- block "header" . }}
+    <header class="SiteHeader">
+      {{- block "header-inside" . }}
+        {{- partial "header.html" . -}}
+      {{ end -}}
+    </header>
+    {{ end -}}
+    <main class="Main">
+      {{- block "navigation" . }}
+        {{- partial "navigation.html" . -}}
+      {{ end -}}
+      {{- block "main" . }}{{ end -}}
+    </main>
+  </body>
+</html>

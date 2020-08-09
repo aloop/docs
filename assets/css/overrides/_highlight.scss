@@ -1,0 +1,12 @@
+.highlight {
+  line-height: var(--code-line-height);
+  margin-bottom: var(--p-margin);
+}
+
+.chroma {
+  font-family: var(--font-monospace);
+  font-size: #{(14 / 16)}rem;
+  padding: calc(var(--space) / 2);
+  border-radius: 5px;
+  overflow: auto;
+}

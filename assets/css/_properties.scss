@@ -1,0 +1,87 @@
+html {
+  // Font
+  --font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-monospace: "Roboto Mono", Monaco, Consolas, Andale Mono, Ubuntu Mono,
+    monospace;
+  --line-height: 1.6;
+  --code-line-height: 1.4;
+  --heading-weight: 300;
+  --h1-size: 1.6rem;
+  --h2-size: 1.3rem;
+  --h3-size: 1.1rem;
+  // Sizing
+  --space: #{(20 / 16)}rem;
+  --li-margin: #{1.25 * 0.15}rem;
+  --p-margin: var(--space);
+  --body-padding: 0;
+  --main-margin: 0 0 calc(var(--space) * 2) 0;
+  --content-max-width: #{(1200 / 16)}rem;
+  --content-padding: calc(var(--space) * 0.75);
+  --content-margin: 0 0 var(--space) 0;
+  // Color
+  --bg-color: rgb(244, 244, 244);
+  --color: hsl(218, 13%, 11%);
+  --link-color: hsl(250, 100%, 75%);
+  --nav-link-color: hsl(250, 100%, 75%);
+  --nav-link-color-active: hsl(250, 60%, 50%);
+  --nav-link-underline-color: #8be9fd;
+  --content-bg: #fff;
+  --content-box-shadow: 0 0 2px rgba(22, 22, 22, 0.2),
+    0 3px 5px rgba(22, 22, 22, 0.1);
+  --content-title-color: #000;
+  --code-bg: #282a36;
+  --code-color: #fff;
+  --tag-bg: hsl(218, 14%, 85%);
+  --tag-bg-hover: hsl(218, 50%, 75%);
+  --tag-bg-selected: hsl(250, 100%, 75%);
+  --tag-color: hsl(218, 13%, 11%);
+  --tag-color-hover: hsl(218, 13%, 11%);
+  --tag-color-selected: #fff;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  html {
+    --bg-color: hsl(231, 15%, 8%);
+    --color: #fff;
+    --link-color: hsl(250, 100%, 80%);
+    --nav-link-color: hsl(250, 30%, 70%);
+    --nav-link-color-active: hsl(250, 100%, 70%);
+    --nav-link-underline-color: hsl(250, 100%, 70%);
+    --tag-bg: hsl(218, 14%, 22%);
+    --tag-bg-hover: hsl(217, 30%, 38%);
+    --tag-bg-selected: hsl(218, 100%, 72%);
+    --tag-color: #fff;
+    --tag-color-hover: #fff;
+    --tag-color-selected: hsl(218, 13%, 11%);
+    --content-bg: hsl(231, 15%, 14%);
+    --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4),
+      0 3px 5px rgba(0, 0, 0, 0.2);
+    --content-title-color: #fff;
+  }
+}
+
+@media screen and (min-width: #{(480 / 16)}rem) {
+  html {
+    --h1-size: 2rem;
+    --h2-size: 1.6rem;
+    --h3-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: #{(680 / 16)}rem) {
+  html {
+    --header-layout: row;
+    --content-padding: calc(var(--space) * 1.5) calc(var(--space) * 1.5)
+      calc(var(--space) * 1.5 - var(--space)) calc(var(--space) * 1.5);
+  }
+}
+
+@media screen and (min-width: #{(768 / 16)}rem) {
+  html {
+    --main-layout: row;
+    --main-margin: 0 var(--space) calc(var(--space) * 2) 0;
+    --content-margin: 0;
+  }
+}

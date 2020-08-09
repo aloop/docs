@@ -1,0 +1,7 @@
+.SiteHeader {
+  display: flex;
+  flex-direction: var(--header-layout, column);
+  align-items: center;
+  justify-content: center;
+  padding: var(--site-header-padding, var(--space));
+}

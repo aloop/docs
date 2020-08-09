@@ -1,0 +1,8 @@
+{
+  "name": "Documentation",
+  "short_name": "Documentation",
+  "background_color": "#181b1f",
+  "theme_color": "#4d33cc",
+  "start_url": "/",
+  "display": "standalone"
+}

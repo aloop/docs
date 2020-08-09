@@ -1,0 +1,9 @@
+ul {
+  padding-left: var(--space);
+  margin-bottom: var(--space);
+  list-style-type: square;
+}
+
+li {
+  margin-bottom: var(--li-margin);
+}
