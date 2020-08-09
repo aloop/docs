@@ -118,7 +118,7 @@ Upon successfully triggering this webhook, it will `touch` the file `example.com
 
 Outside of the scope of this document, a simple reverse proxy will suffice.
 
-## Hugo build systemd service
+## Static site build systemd service
 
 Create a file at `/etc/systemd/system/static-site-build@.service`, with the following contents:
 
