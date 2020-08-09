@@ -1,0 +1,32 @@
+.Breadcrumbs {
+  list-style: none;
+  margin-bottom: calc(var(--space) / 2);
+  font-size: #{(14 / 16)}rem;
+}
+
+.Breadcrumbs-item {
+  display: inline-block;
+
+  &::after {
+    content: var(--breadcrumb-separator);
+  }
+
+  &:last-of-type {
+    &::after {
+      content: "";
+    }
+  }
+}
+
+.Breadcrumbs-link {
+  display: inline-block;
+  padding: #{(2.5 / 16)}rem #{(5 / 16)}rem;
+  color: var(--breadcrumb-color);
+  text-decoration: none;
+
+  &.is-current,
+  &:active,
+  &:hover {
+    color: var(--breadcrumb-color-active);
+  }
+}

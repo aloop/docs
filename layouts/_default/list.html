@@ -1,6 +1,11 @@
 {{ define "main" }}
   <article class="Content">
-    <h1 class="Content-title">{{ .Title }}</h1>
+    <aside>
+      {{- partial "breadcrumbs.html" . -}}
+    </aside>
+    <header>
+      <h1 class="Content-title">{{ .Title }}</h1>
+    </header>
 
     {{ .Content }}
 
