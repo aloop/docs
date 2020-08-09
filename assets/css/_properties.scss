@@ -16,6 +16,7 @@ html {
   --li-margin: #{(1.25 * 0.15)}rem;
   --p-margin: var(--space);
   --body-padding: 0;
+  --body-min-width: #{(280 / 16)}rem;
   --site-title-size: #{(32 / 16)}rem;
   --main-margin: 0 0 calc(var(--space) * 2) 0;
   --content-max-width: #{(1200 / 16)}rem;
