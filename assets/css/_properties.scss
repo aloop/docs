@@ -34,12 +34,6 @@ html {
   --content-title-color: #000;
   --code-bg: #282a36;
   --code-color: #fff;
-  --tag-bg: hsl(218, 14%, 85%);
-  --tag-bg-hover: hsl(218, 50%, 75%);
-  --tag-bg-selected: hsl(250, 100%, 75%);
-  --tag-color: hsl(218, 13%, 11%);
-  --tag-color-hover: hsl(218, 13%, 11%);
-  --tag-color-selected: #fff;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -50,12 +44,6 @@ html {
     --nav-link-color: hsl(250, 30%, 70%);
     --nav-link-color-active: hsl(250, 100%, 70%);
     --nav-link-underline-color: hsl(250, 100%, 70%);
-    --tag-bg: hsl(218, 14%, 22%);
-    --tag-bg-hover: hsl(217, 30%, 38%);
-    --tag-bg-selected: hsl(218, 100%, 72%);
-    --tag-color: #fff;
-    --tag-color-hover: #fff;
-    --tag-color-selected: hsl(218, 13%, 11%);
     --content-bg: hsl(231, 15%, 14%);
     --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4),
       0 3px 5px rgba(0, 0, 0, 0.2);
