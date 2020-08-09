@@ -1,7 +1,7 @@
 <nav class="Nav">
   <ul class='Nav-list'>
     <li class='Nav-list-item'>
-      <a href="/" class='Nav-list-link {{- if eq . (.GetPage "/") }} is-current{{end}}'>Welcome</a>
+      <a href="/" class='Nav-list-link {{- if eq . (.GetPage "/") }} is-current{{end}}'>{{ (.GetPage "/").Title }}</a>
     </li>
   {{ $currentPage := . }}
   {{- range .Site.Sections -}}
