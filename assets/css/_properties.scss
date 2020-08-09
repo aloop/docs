@@ -35,6 +35,7 @@ html {
   --content-title-color: #000;
   --code-bg: #282a36;
   --code-color: #fff;
+  --last-updated-color: rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -49,6 +50,7 @@ html {
     --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4),
       0 3px 5px rgba(0, 0, 0, 0.2);
     --content-title-color: #fff;
+    --last-updated-color: rgba(255, 255, 255, 0.5);
   }
 }
 
