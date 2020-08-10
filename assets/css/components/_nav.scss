@@ -6,7 +6,7 @@
 }
 
 .Nav-section {
-  margin: calc(var(--space) * 2) 0;
+  margin: calc(var(--space) * 1.5) 0;
 }
 
 .Nav-section-title {
@@ -14,7 +14,7 @@
   letter-spacing: 1px;
   font-weight: bold;
   font-size: #{(14 / 16)}rem;
-  margin-bottom: var(--space);
+  margin-bottom: calc(var(--space) / 2);
 }
 
 .Nav-list {
@@ -27,7 +27,7 @@
 }
 
 .Nav-list-item {
-  margin-bottom: calc(var(--space) / 2);
+  margin-bottom: calc(var(--space) / 3);
 
   &:last-of-type {
     margin-bottom: 0;
