@@ -24,6 +24,10 @@
   color: var(--breadcrumb-color);
   text-decoration: none;
 
+  .Breadcrumbs-item:first-of-type > & {
+    padding-left: 0;
+  }
+
   &.is-current,
   &:active,
   &:hover {
