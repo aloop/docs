@@ -17,6 +17,7 @@
       {{ end -}}
     </title>
     <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="data:,">
     <!-- <link rel="apple-touch-icon" href="/images/icon-192.png"> -->
 
     {{ $script := resources.Get "js/main.js" | js.Build (dict "minify" true) | fingerprint -}}
