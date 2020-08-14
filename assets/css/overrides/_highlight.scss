@@ -4,9 +4,11 @@
 }
 
 .chroma {
+  background-color: var(--code-bg);
   font-family: var(--font-monospace);
-  font-size: #{(14 / 16)}rem;
+  font-size: #{(14 / 16)}em;
   padding: calc(var(--space) / 2);
   border-radius: 5px;
   overflow: auto;
+  box-shadow: var(--content-box-shadow);
 }

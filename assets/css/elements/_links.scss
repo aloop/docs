@@ -4,6 +4,7 @@ a {
 
   &:hover,
   &:focus {
+    color: var(--link-color-active);
     text-decoration: none;
   }
 }

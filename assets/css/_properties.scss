@@ -5,12 +5,13 @@ html {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-monospace: "Roboto Mono", Monaco, Consolas, Andale Mono, Ubuntu Mono,
     monospace;
+  --content-font-size: 1rem;
   --line-height: 1.6;
   --code-line-height: 1.4;
   --heading-weight: 300;
-  --h1-size: 1.6rem;
-  --h2-size: 1.3rem;
-  --h3-size: 1.1rem;
+  --h1-size: 1.6em;
+  --h2-size: 1.3em;
+  --h3-size: 1.1em;
   // Sizing
   --space: #{(20 / 16)}rem;
   --li-margin: #{(1.25 * 0.15)}rem;
@@ -26,19 +27,19 @@ html {
   --bg-color: rgb(244, 244, 244);
   --color: hsl(218, 13%, 11%);
   --link-color: hsl(250, 100%, 65%);
-  --nav-link-color: hsl(250, 100%, 75%);
-  --nav-link-color-active: hsl(250, 60%, 50%);
-  --nav-link-underline-color: #8be9fd;
+  --link-color-active: hsl(250, 90%, 45%);
+  --nav-link-color: var(--link-color);
+  --nav-link-color-active: var(--link-color-active);
   --content-bg: #fff;
-  --content-box-shadow: 0 0 2px rgba(22, 22, 22, 0.2),
-    0 3px 5px rgba(22, 22, 22, 0.1);
+  --content-box-shadow: 0 0 2px rgba(22, 22, 22, 0.05),
+    0 3px 5px rgba(22, 22, 22, 0.025);
   --content-title-color: #000;
   --code-bg: #282a36;
   --code-color: #fff;
-  --breadcrumb-color: hsl(250, 60%, 55%);
-  --breadcrumb-color-active: hsl(250, 100%, 80%);
+  --breadcrumb-color: var(--link-color);
+  --breadcrumb-color-active: var(--link-color-active);
   --breadcrumb-separator: "»";
-  --last-updated-color: rgba(0, 0, 0, 0.5);
+  --last-updated-color: rgba(0, 0, 0, 0.65);
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -46,22 +47,21 @@ html {
     --bg-color: hsl(231, 15%, 8%);
     --color: #fff;
     --link-color: hsl(250, 100%, 80%);
-    --nav-link-color: hsl(250, 30%, 70%);
-    --nav-link-color-active: hsl(250, 100%, 70%);
-    --nav-link-underline-color: hsl(250, 100%, 70%);
+    --link-color-active: hsl(250, 100%, 70%);
+    --breadcrumb-color-active: hsl(250, 100%, 73%);
     --content-bg: hsl(231, 15%, 14%);
-    --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.4),
-      0 3px 5px rgba(0, 0, 0, 0.2);
+    --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2),
+      0 3px 5px rgba(0, 0, 0, 0.1);
     --content-title-color: #fff;
-    --last-updated-color: rgba(255, 255, 255, 0.5);
+    --last-updated-color: rgba(255, 255, 255, 0.6);
   }
 }
 
 @media screen and (min-width: #{(480 / 16)}rem) {
   html {
-    --h1-size: 2rem;
-    --h2-size: 1.6rem;
-    --h3-size: 1.1rem;
+    --h1-size: 2em;
+    --h2-size: 1.6em;
+    --h3-size: 1.1em;
     --site-title-size: #{(36 / 16)}rem;
   }
 }
