@@ -141,6 +141,9 @@ WorkingDirectory=/var/www/%I/
 ExecStart=git pull origin master
 ExecStart=/var/www/%I/build.sh
 
+CPUWeight=10
+CPUQuota=80%
+
 PrivateTmp=yes
 PrivateDevices=yes
 ProtectHome=tmpfs
