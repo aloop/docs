@@ -18,13 +18,14 @@
     </title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="data:,">
-    <!-- <link rel="apple-touch-icon" href="/images/icon-192.png"> -->
 
-    {{ $script := resources.Get "js/main.js" | js.Build (dict "minify" true) | fingerprint -}}
-    <script defer src="{{ $script.Permalink }}"></script>
+    {{ $sassOptions := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
+    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | fingerprint -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 
-    {{ $style := resources.Get "css/styles.scss" | toCSS | minify | fingerprint -}}
-    <link rel="stylesheet" href="{{ $style.Permalink }}" />
+    {{ $jsOptions := (dict "minify" true "sourcemap" true) }}
+    {{ $script := resources.Get "js/main.js" | js.Build $jsOptions | fingerprint -}}
+    <script defer src="{{ $script.RelPermalink }}"></script>
 
     {{- block "canonical" . }}
       <link rel="canonical" href="{{ .Permalink }}">

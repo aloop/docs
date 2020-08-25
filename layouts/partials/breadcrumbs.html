@@ -11,6 +11,6 @@
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
   {{ end }}
   <li class="Breadcrumbs-item">
-    <a href="{{ .p1.Permalink }}" class="Breadcrumbs-link {{- if eq .p1 .p2 }} is-current{{ end }}" title="{{ .p1.LinkTitle }}">{{ .p1.Title }}</a>
+    <a href="{{ .p1.RelPermalink }}" class="Breadcrumbs-link {{- if eq .p1 .p2 }} is-current{{ end }}" title="{{ .p1.LinkTitle }}">{{ .p1.Title }}</a>
   </li>
 {{ end }}
