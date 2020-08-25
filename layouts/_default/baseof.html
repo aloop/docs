@@ -19,13 +19,11 @@
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="data:,">
 
-    {{ $sassOptions := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
-    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | fingerprint -}}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-
-    {{ $jsOptions := (dict "minify" true "sourcemap" true) }}
-    {{ $script := resources.Get "js/main.js" | js.Build $jsOptions | fingerprint -}}
-    <script defer src="{{ $script.RelPermalink }}"></script>
+    {{ $sassOptions := (dict "enableSourceMap" (not hugo.IsProduction)) }}
+    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions -}}
+    <style>
+      {{- $style.Content | safeCSS -}}
+    </style>
 
     {{- block "canonical" . }}
       <link rel="canonical" href="{{ .Permalink }}">
@@ -52,5 +50,14 @@
       {{ end -}}
       {{- block "main" . }}{{ end -}}
     </main>
+    {{ $jsDefines := dict "process.env.NODE_ENV" `"development"` }}
+    {{ if hugo.IsProduction }}
+      {{ $jsDefines = dict "process.env.NODE_ENV" `"production"` }}
+    {{ end }}
+    {{ $jsOptions := (dict "minify" true "sourcemap" true "defines" $jsDefines) }}
+    {{ $script := resources.Get "js/main.js" | js.Build $jsOptions -}}
+    <script>
+      {{- $script.Content | safeJS -}}
+    </script>
   </body>
 </html>
