@@ -1,3 +1,4 @@
+theme = "docs-v1"
 baseURL = "/"
 languageCode = "en-us"
 title = "Documentation"
