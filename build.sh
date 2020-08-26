@@ -4,6 +4,14 @@ set -euo pipefail
 
 shopt -s globstar
 
+if [ ! -d "node_modules" ]; then
+  echo "Installing npm packages..."
+  npm install
+else
+  echo "Updating npm packages..."
+  npm update
+fi
+
 if HUGO_ENV=production hugo --gc --minify --cleanDestinationDir=true; then
   # Try to compress the files ahead of time so the webserver can do less work
   for uncompressed_file in public/**/*.{html,css,js,mjs,json,svg,xml}; do

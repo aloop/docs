@@ -20,7 +20,7 @@
     <link rel="icon" href="data:,">
 
     {{ $sassOptions := (dict "enableSourceMap" (not hugo.IsProduction)) }}
-    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions -}}
+    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS -}}
     <style>
       {{- $style.Content | safeCSS -}}
     </style>
@@ -37,6 +37,7 @@
       {{ .Content | safeJS }}
     </script>
     {{ end -}}
+
     {{- block "header" . }}
     <header class="SiteHeader">
       {{- block "header-inside" . }}
@@ -44,12 +45,14 @@
       {{ end -}}
     </header>
     {{ end -}}
+
     <main class="Main">
       {{- block "navigation" . }}
         {{- partial "navigation.html" . -}}
       {{ end -}}
       {{- block "main" . }}{{ end -}}
     </main>
+
     {{ $jsDefines := dict "process.env.NODE_ENV" `"development"` }}
     {{ if hugo.IsProduction }}
       {{ $jsDefines = dict "process.env.NODE_ENV" `"production"` }}
