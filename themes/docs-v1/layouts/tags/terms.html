@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <article class="Content">
+    <aside>{{ partial "breadcrumbs.html" . }}</aside>
+
+    <header>
+      <h1 class="Content-title">{{ .Title }}</h1>
+    </header>
+
+    {{ .Content }}
+
+    {{- with .Data.Terms.ByCount -}}
+      <ul class="c-Tags">
+        {{- range . -}}
+          <li class="c-Tag">
+            <a href="{{ .Page.RelPermalink }}" class="c-Tag-link">{{ .Page.Name }}</a>
+          </li>
+        {{- end -}}
+      </ul>
+    {{- else -}}
+      <p>No tags found.</p>
+    {{- end -}}
+  </article>
+{{ end }}

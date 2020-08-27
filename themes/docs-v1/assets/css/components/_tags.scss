@@ -1,0 +1,50 @@
+.c-Tags-container {
+  align-items: center;
+  margin-bottom: var(--space);
+
+  > .c-Tags {
+    margin-bottom: 0;
+  }
+}
+
+.c-Tags-container-title {
+  font-size: #{(12 / 16)}em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: #{(1.5 / 16)}rem;
+}
+
+.c-Tags {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: #{(600 / 16)}rem;
+  padding: 0;
+}
+
+.c-Tags--small {
+  font-size: #{(14 / 16)}rem;
+}
+
+.c-Tag {
+  transition: background-color 100ms ease-out;
+  margin-right: #{(5 / 16)}em;
+  border-radius: 2.5px;
+  background-color: var(--tag-bg);
+  color: var(--tag-color);
+  box-shadow: var(--content-box-shadow);
+  text-align: center;
+  --link-color: var(--tag-color);
+  --link-color-active: var(--tag-color-active);
+
+  &:hover,
+  &:focus {
+    background-color: var(--tag-bg-active);
+    color: var(--tag-color-active);
+  }
+}
+
+.c-Tag-link {
+  text-decoration: none;
+  padding: #{(2.5 / 16)}em #{(7.5 / 16)}em;
+}

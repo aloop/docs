@@ -40,6 +40,10 @@ html {
   --breadcrumb-color-active: var(--link-color-active);
   --breadcrumb-separator: "»";
   --last-updated-color: rgba(0, 0, 0, 0.65);
+  --tag-color: #fff;
+  --tag-bg: var(--link-color);
+  --tag-color-active: var(--tag-color);
+  --tag-bg-active: var(--link-color-active);
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -54,6 +58,7 @@ html {
       0 3px 5px rgba(0, 0, 0, 0.1);
     --content-title-color: #fff;
     --last-updated-color: rgba(255, 255, 255, 0.6);
+    --tag-color: #000;
   }
 }
 
