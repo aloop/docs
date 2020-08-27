@@ -12,6 +12,10 @@ tags:
   - webdev
 ---
 
+## Notes
+
+This is was created for Ubuntu Server, other distros may have different directory structures, and the user `www-data` may not exist, or may have a differently named equivalent.
+
 ## Packages
 
 ```bash
@@ -154,8 +158,9 @@ ProtectControlGroups=yes
 ProtectHostname=yes
 RestrictNamespaces=yes
 RestrictRealtime=yes
-MemoryDenyWriteExecute=yes
-RestrictAddressFamilies=
+# The following seems to crash node.js
+#MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_INET AF_INET6
 RestrictSUIDSGID=yes
 SystemCallArchitectures=native
 
@@ -163,8 +168,10 @@ SystemCallFilter=@system-service
 SystemCallErrorNumber=EPERM
 NoNewPrivileges=yes
 
-TemporaryFileSystem=/var/www:ro
-BindPaths=/var/www/%I/
+TemporaryFileSystem=/var/www:ro /etc/nginx:ro /etc/letsencrypt:ro
+# /var/www/.ssh is only needed when using git over ssh
+BindPaths=/var/www/.ssh/known_hosts /var/www/.npm /var/www/%I/
+BindReadOnlyPaths=/var/www/.ssh/ /etc/ssl
 
 CapabilityBoundingSet=
 AmbientCapabilities=
