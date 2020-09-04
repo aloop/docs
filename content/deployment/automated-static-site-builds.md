@@ -203,4 +203,4 @@ and that you have configured a webhook which executes `touch /var/lib/webhooks/Y
 sudo systemctl enable --now static-site-build@YOUR_SITE_HERE.path
 ```
 
-And to manually trigger a build: `sudo touch /var/lib/webhooks/YOUR_SITE_HERE`
+And to manually trigger a build: `sudo systemctl start static-site-build@YOUR_SITE_HERE.service`
