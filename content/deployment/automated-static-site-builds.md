@@ -76,7 +76,7 @@ The example below will need to be adjusted with real parameters, this example is
 
 To generate a random uuid, you can use `uuidgen --random`
 
-Upon successfully triggering this webhook, it will `touch` the file `example.com` in the `/var/lib/webhooks/` directory, which in turn triggers the systemd path file we setup later in this document, which then runs the systemd service that executes the build script.
+Upon successfully triggering this webhook, it will `touch` the file `YOUR_SITE_HERE` in the `/var/lib/webhooks/` directory, which in turn triggers the systemd path file we setup later in this document, which then runs the systemd service that executes the build script.
 
 ```json
 [
@@ -87,7 +87,7 @@ Upon successfully triggering this webhook, it will `touch` the file `example.com
     "pass-arguments-to-command": [
       {
         "source": "string",
-        "name": "example.com"
+        "name": "YOUR_SITE_HERE"
       }
     ],
     "trigger-rule": {
@@ -180,14 +180,27 @@ AmbientCapabilities=
 WantedBy=multi-user.target
 ```
 
-## systemd .path files
+## systemd .path template unit
 
-For each site that you want to build, make a .path file. For example, create the file `/etc/systemd/system/static-site-build@example.com.path`, with contents:
+To trigger a build when a webhook modifies a file, we'll need to make a .path template unit. Create the file `/etc/systemd/system/static-site-build@.path`, with the contents:
 
 ```ini
 [Install]
 WantedBy=multi-user.target
 
 [Path]
-PathChanged=/var/lib/webhooks/example.com
+PathChanged=/var/lib/webhooks/%I
 ```
+
+## Putting it to use
+
+After creating the systemd files above, make sure to run `sudo systemctl daemon-reload`, so that systemd is aware of the new unit and path files.
+
+Assuming that a git repo that has a `build.sh` script for building a site resides at `/var/www/YOUR_SITE_HERE/`,
+and that you have configured a webhook which executes `touch /var/lib/webhooks/YOUR_SITE_HERE`, you can simply execute the following:
+
+```
+sudo systemctl enable --now static-site-build@YOUR_SITE_HERE.path
+```
+
+And to manually trigger a build: `sudo touch /var/lib/webhooks/YOUR_SITE_HERE`
