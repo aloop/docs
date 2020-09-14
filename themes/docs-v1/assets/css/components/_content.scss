@@ -12,8 +12,7 @@
   font-size: var(--content-font-size);
   transition: transform var(--nav-transition-props);
 
-  .NavContainer:hover + & {
-    transition-delay: 0ms;
+  .NavContainer.is-open ~ & {
     transform: translateX(
       calc(
         var(--nav-width) -
@@ -21,7 +20,7 @@
       )
     );
 
-    @media screen and (min-width: rem(768)) {
+    @media screen and (min-width: $nav-media-query-width) {
       transform: none;
     }
   }

@@ -4,6 +4,10 @@
 }
 
 .NavContainer-toggle {
+  -webkit-appearance: button;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
@@ -13,12 +17,11 @@
   height: var(--nav-icon-full-size);
   transition: transform var(--nav-transition-props);
 
-  .NavContainer:hover & {
-    transition-delay: 0ms;
+  .is-open & {
     transform: translateX(calc(var(--space) - var(--nav-icon-spacing)));
   }
 
-  @media screen and (min-width: rem(768)) {
+  @media screen and (min-width: $nav-media-query-width) {
     display: none;
   }
 }
@@ -37,29 +40,25 @@
     border-radius: var(--nav-icon-size);
     transition: transform var(--nav-transition-props),
       background-color var(--nav-transition-props);
-
-    .NavContainer:hover & {
-      transition-delay: 0ms;
-    }
   }
 
   &::before {
-    transform: translateY(calc(var(--bar-gap) * -1));
+    transform: translate(-50%, calc(var(--bar-gap) * -1));
   }
 
   &::after {
-    transform: translateY(var(--bar-gap));
+    transform: translate(-50%, var(--bar-gap));
   }
 
-  .NavContainer:hover & {
+  .is-open & {
     background-color: transparent;
   }
 
-  .NavContainer:hover &::before {
-    transform: rotate(-225deg);
+  .is-open &::before {
+    transform: translateX(-50%) rotate(-225deg);
   }
 
-  .NavContainer:hover &::after {
-    transform: rotate(225deg);
+  .is-open &::after {
+    transform: translateX(-50%) rotate(225deg);
   }
 }

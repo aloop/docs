@@ -15,13 +15,12 @@
     opacity var(--nav-transition-props);
   transform: translateX(-100%);
 
-  .NavContainer:hover & {
-    transition-delay: 0ms;
+  .NavContainer.is-open & {
     transform: translateX(0%);
     opacity: 1;
   }
 
-  @media screen and (min-width: rem(768)) {
+  @media screen and (min-width: $nav-media-query-width) {
     position: relative;
     transition: none;
     transform: none;
