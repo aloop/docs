@@ -3,7 +3,7 @@
   opacity: 0;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 100%;
   height: 100%;
   width: var(--nav-width);
   max-width: var(--nav-width);
@@ -13,17 +13,16 @@
   line-height: 1.2;
   transition: transform var(--nav-transition-props),
     opacity var(--nav-transition-props);
-  transform: translateX(-100%);
 
   .NavContainer.is-open & {
-    transform: translateX(0%);
+    transform: translateX(100%);
     opacity: 1;
   }
 
   @media screen and (min-width: $nav-media-query-width) {
     position: relative;
     transition: none;
-    transform: none;
+    right: 0;
     padding-top: 0;
     opacity: 1;
   }
