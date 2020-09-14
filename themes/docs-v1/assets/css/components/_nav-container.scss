@@ -55,10 +55,10 @@
   }
 
   .is-open &::before {
-    transform: translateX(-50%) rotate(-225deg) scale(1.25);
+    transform: translateX(-50%) rotate(225deg) scale(1.25);
   }
 
   .is-open &::after {
-    transform: translateX(-50%) rotate(225deg) scale(1.25);
+    transform: translateX(-50%) rotate(-225deg) scale(1.25);
   }
 }
