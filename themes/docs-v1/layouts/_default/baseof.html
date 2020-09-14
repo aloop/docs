@@ -20,10 +20,8 @@
     <link rel="icon" href="data:,">
 
     {{ $sassOptions := (dict "enableSourceMap" (not hugo.IsProduction)) }}
-    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS -}}
-    <style>
-      {{- $style.Content | safeCSS -}}
-    </style>
+    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS | fingerprint "sha256" -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
 
     {{- block "canonical" . }}
       <link rel="canonical" href="{{ .Permalink }}">
