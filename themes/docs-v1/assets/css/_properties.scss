@@ -5,7 +5,7 @@ html {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-monospace: "Roboto Mono", Monaco, Consolas, Andale Mono, Ubuntu Mono,
     monospace;
-  --content-font-size: 1rem;
+  --content-font-size: #{rem(16)};
   --line-height: 1.6;
   --code-line-height: 1.4;
   --heading-weight: 300;
@@ -13,14 +13,14 @@ html {
   --h2-size: 1.4em;
   --h3-size: 1.1em;
   // Sizing
-  --space: #{(20 / 16)}rem;
-  --li-margin: #{(1.25 * 0.15)}rem;
+  --space: #{rem(20)};
+  --li-margin: #{rem(4)};
   --p-margin: var(--space);
   --body-padding: 0;
-  --body-min-width: #{(280 / 16)}rem;
-  --site-title-size: #{(32 / 16)}rem;
+  --body-min-width: #{rem(280)};
+  --site-title-size: #{rem(32)};
   --main-margin: 0 0 calc(var(--space) * 2) 0;
-  --content-max-width: #{(1200 / 16)}rem;
+  --content-max-width: #{rem(1200)};
   --content-padding: calc(var(--space) * 0.75);
   --content-margin: 0 0 var(--space) 0;
   // Color
@@ -62,16 +62,16 @@ html {
   }
 }
 
-@media screen and (min-width: #{(480 / 16)}rem) {
+@media screen and (min-width: rem(480)) {
   html {
     --h1-size: 2em;
     --h2-size: 1.5em;
     --h3-size: 1.1em;
-    --site-title-size: #{(36 / 16)}rem;
+    --site-title-size: #{rem(36)};
   }
 }
 
-@media screen and (min-width: #{(680 / 16)}rem) {
+@media screen and (min-width: rem(680)) {
   html {
     --header-layout: row;
     --content-padding: calc(var(--space) * 1.5) calc(var(--space) * 1.5)
@@ -79,7 +79,7 @@ html {
   }
 }
 
-@media screen and (min-width: #{(768 / 16)}rem) {
+@media screen and (min-width: rem(768)) {
   html {
     --h1-size: 2.4em;
     --main-layout: row;

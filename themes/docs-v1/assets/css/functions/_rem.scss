@@ -1,0 +1,11 @@
+@function rem($pixels, $base-font-size-px: 16) {
+  @if not(unitless($pixels)) {
+    @error "rem: $pixels should be a unitless number, '#{$pixels}' given.";
+  }
+
+  @if not(unitless($base-font-size-px)) {
+    @error "rem: $base-font-size-px should be a unitless number, '#{$base-font-size-px}' given.";
+  }
+
+  @return ($pixels / $base-font-size-px) + 0rem;
+}

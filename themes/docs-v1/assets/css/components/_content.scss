@@ -13,10 +13,10 @@
 .Content p > code {
   background-color: var(--code-bg);
   color: var(--code-color);
-  border-radius: #{(5 / 16)}rem;
+  border-radius: rem(5);
   padding: 0.2rem 0.2rem 0.1rem 0.2rem;
   margin-right: 0.1em;
-  font-size: #{(14 / 16)}em;
+  font-size: em(14);
 }
 
 .Content-title {

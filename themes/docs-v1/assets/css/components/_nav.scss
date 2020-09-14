@@ -1,7 +1,7 @@
 .Nav {
-  min-width: #{(250 / 16)}rem;
+  min-width: rem(250);
   padding-right: var(--space);
-  font-size: #{(16 / 16)}rem;
+  font-size: rem(16);
   line-height: 1.2;
 }
 
@@ -13,7 +13,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
-  font-size: #{(14 / 16)}rem;
+  font-size: rem(14);
   margin-bottom: calc(var(--space) / 2);
 }
 
