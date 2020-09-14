@@ -1,4 +1,5 @@
 theme = "docs-v1"
+publishdir = "dist"
 baseURL = "/"
 languageCode = "en-us"
 title = "Documentation"
