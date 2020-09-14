@@ -11,4 +11,19 @@ if (navContainer !== null && toggle !== null) {
   toggle.addEventListener("click", () => {
     navContainer.classList.toggle("is-open");
   });
+
+  document.addEventListener("keyup", ({ key }) => {
+    if (key === "Escape") {
+      navContainer.classList.remove("is-open");
+    }
+  });
+
+  document.addEventListener("click", ({ target }) => {
+    if (
+      navContainer.classList.contains("is-open") &&
+      !navContainer.contains(target)
+    ) {
+      navContainer.classList.remove("is-open");
+    }
+  });
 }
