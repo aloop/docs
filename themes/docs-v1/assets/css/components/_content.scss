@@ -1,6 +1,4 @@
 .Content {
-  flex: 0 1 auto;
-  align-self: start;
   min-width: 0;
   width: 100%;
   max-width: var(--content-max-width, 100%);
@@ -10,19 +8,6 @@
   margin: var(--content-margin);
   border-radius: rem(4);
   font-size: var(--content-font-size);
-
-  @media screen and (max-width: ($nav-media-query-width - rem(1))) {
-    transition: transform var(--nav-transition-props);
-
-    .NavContainer.is-open ~ & {
-      transform: translateX(
-        calc(
-          var(--nav-width) -
-            (var(--nav-icon-size) + (var(--nav-icon-spacing) * 2))
-        )
-      );
-    }
-  }
 }
 
 .Content p > code {

@@ -1,6 +1,6 @@
 .SiteHeader {
+  grid-area: header;
   display: flex;
-  flex: 0 1 auto;
   align-items: center;
   justify-content: center;
   padding: var(--site-header-padding, var(--space));

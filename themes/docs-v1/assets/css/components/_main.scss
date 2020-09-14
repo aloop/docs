@@ -1,5 +1,17 @@
 .Main {
-  display: flex;
-  flex: 1 1 auto;
+  grid-area: main;
   margin: var(--main-margin);
+
+  @media screen and (max-width: ($nav-media-query-width - rem(1))) {
+    transition: transform var(--nav-transition-props);
+
+    .NavContainer.is-open ~ & {
+      transform: translateX(
+        calc(
+          var(--nav-width) -
+            (var(--nav-icon-size) + (var(--nav-icon-spacing) * 2))
+        )
+      );
+    }
+  }
 }
