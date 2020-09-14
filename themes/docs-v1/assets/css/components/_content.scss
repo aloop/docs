@@ -10,18 +10,17 @@
   margin: var(--content-margin);
   border-radius: rem(4);
   font-size: var(--content-font-size);
-  transition: transform var(--nav-transition-props);
 
-  .NavContainer.is-open ~ & {
-    transform: translateX(
-      calc(
-        var(--nav-width) -
-          (var(--nav-icon-size) + (var(--nav-icon-spacing) * 2))
-      )
-    );
+  @media screen and (max-width: ($nav-media-query-width - rem(1))) {
+    transition: transform var(--nav-transition-props);
 
-    @media screen and (min-width: $nav-media-query-width) {
-      transform: none;
+    .NavContainer.is-open ~ & {
+      transform: translateX(
+        calc(
+          var(--nav-width) -
+            (var(--nav-icon-size) + (var(--nav-icon-spacing) * 2))
+        )
+      );
     }
   }
 }
