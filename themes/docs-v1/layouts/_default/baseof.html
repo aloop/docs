@@ -38,20 +38,22 @@
     </script>
     {{ end -}}
 
-    {{- block "header" . }}
-    <header class="SiteHeader">
-      {{- block "header-inside" . }}
-        {{- partial "header.html" . -}}
+    <div class="Page">
+      {{- block "header" . }}
+      <header class="SiteHeader">
+        {{- block "header-inside" . }}
+          {{- partial "header.html" . -}}
+        {{ end -}}
+      </header>
       {{ end -}}
-    </header>
-    {{ end -}}
 
-    <main class="Main">
-      {{- block "navigation" . }}
-        {{- partial "navigation.html" . -}}
-      {{ end -}}
-      {{- block "main" . }}{{ end -}}
-    </main>
+      <main class="Main">
+        {{- block "navigation" . }}
+          {{- partial "navigation.html" . -}}
+        {{ end -}}
+        {{- block "main" . }}{{ end -}}
+      </main>
+    </div>
 
     {{ $jsDefines := dict "process.env.NODE_ENV" `"development"` }}
     {{ if hugo.IsProduction }}

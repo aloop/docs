@@ -1,0 +1,65 @@
+.NavContainer {
+  position: relative;
+  flex-grow: 0;
+}
+
+.NavContainer-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--nav-icon-spacing);
+  z-index: 10;
+  width: var(--nav-icon-full-size);
+  height: var(--nav-icon-full-size);
+  transition: transform var(--nav-transition-props);
+
+  .NavContainer:hover & {
+    transition-delay: 0ms;
+    transform: translateX(calc(var(--space) - var(--nav-icon-spacing)));
+  }
+
+  @media screen and (min-width: rem(768)) {
+    display: none;
+  }
+}
+
+.NavContainer-icon {
+  --bar-gap: calc((var(--nav-icon-size) / 2 - #{rem(2)}));
+
+  &,
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: var(--nav-icon-size);
+    height: rem(2);
+    background-color: var(--nav-icon-color);
+    border-radius: var(--nav-icon-size);
+    transition: transform var(--nav-transition-props),
+      background-color var(--nav-transition-props);
+
+    .NavContainer:hover & {
+      transition-delay: 0ms;
+    }
+  }
+
+  &::before {
+    transform: translateY(calc(var(--bar-gap) * -1));
+  }
+
+  &::after {
+    transform: translateY(var(--bar-gap));
+  }
+
+  .NavContainer:hover & {
+    background-color: transparent;
+  }
+
+  .NavContainer:hover &::before {
+    transform: rotate(-225deg);
+  }
+
+  .NavContainer:hover &::after {
+    transform: rotate(225deg);
+  }
+}

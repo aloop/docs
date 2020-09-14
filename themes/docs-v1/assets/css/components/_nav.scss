@@ -1,8 +1,33 @@
 .Nav {
-  min-width: rem(250);
+  background-color: var(--nav-bg);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--nav-width);
+  max-width: var(--nav-width);
+  padding-top: calc(var(--nav-icon-full-size) + var(--space));
   padding-right: var(--space);
   font-size: rem(16);
   line-height: 1.2;
+  transition: transform var(--nav-transition-props),
+    opacity var(--nav-transition-props);
+  transform: translateX(-100%);
+
+  .NavContainer:hover & {
+    transition-delay: 0ms;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  @media screen and (min-width: rem(768)) {
+    position: relative;
+    transition: none;
+    transform: none;
+    padding-top: 0;
+    opacity: 1;
+  }
 }
 
 .Nav-section {

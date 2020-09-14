@@ -1,4 +1,6 @@
 .Content {
+  flex: 0 1 auto;
+  align-self: start;
   min-width: 0;
   width: 100%;
   max-width: var(--content-max-width, 100%);
@@ -6,16 +8,31 @@
   box-shadow: var(--content-box-shadow);
   padding: var(--content-padding);
   margin: var(--content-margin);
-  border-radius: 4px;
+  border-radius: rem(4);
   font-size: var(--content-font-size);
+  transition: transform var(--nav-transition-props);
+
+  .NavContainer:hover + & {
+    transition-delay: 0ms;
+    transform: translateX(
+      calc(
+        var(--nav-width) -
+          (var(--nav-icon-size) + (var(--nav-icon-spacing) * 2))
+      )
+    );
+
+    @media screen and (min-width: rem(768)) {
+      transform: none;
+    }
+  }
 }
 
 .Content p > code {
   background-color: var(--code-bg);
   color: var(--code-color);
   border-radius: rem(5);
-  padding: 0.2rem 0.2rem 0.1rem 0.2rem;
-  margin-right: 0.1em;
+  padding: em(4) em(4) em(2) em(4);
+  margin-right: em(1);
   font-size: em(14);
 }
 
