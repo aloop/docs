@@ -23,6 +23,11 @@
     {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS | fingerprint "sha256" -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
 
+    {{ $jsDefines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
+    {{ $jsOptions := (dict "bundle" true "minify" true "sourceMap" (cond hugo.IsProduction "" "inline") "defines" $jsDefines) }}
+    {{ $script := resources.Get "js/main.js" | js.Build $jsOptions | fingerprint "sha256" -}}
+    <script type="text/javascript" src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
+
     {{- block "canonical" . }}
       <link rel="canonical" href="{{ .Permalink }}">
     {{ end -}}
@@ -51,15 +56,5 @@
     <main class="Main">
       {{- block "main" . }}{{ end -}}
     </main>
-
-    {{ $jsDefines := dict "process.env.NODE_ENV" `"development"` }}
-    {{ if hugo.IsProduction }}
-      {{ $jsDefines = dict "process.env.NODE_ENV" `"production"` }}
-    {{ end }}
-    {{ $jsOptions := (dict "minify" true "sourcemap" true "defines" $jsDefines) }}
-    {{ $script := resources.Get "js/main.js" | js.Build $jsOptions -}}
-    <script>
-      {{- $script.Content | safeJS -}}
-    </script>
   </body>
 </html>
