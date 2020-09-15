@@ -6,6 +6,7 @@
 
 @import "generic/reset";
 
+@import "elements/root";
 @import "elements/body";
 @import "elements/headings";
 @import "elements/links";
@@ -24,6 +25,7 @@
 @import "components/last-updated";
 @import "components/breadcrumbs";
 @import "components/tags";
+@import "components/heading-anchor";
 
 @import "utilities/hidden";
 @import "utilities/visually-hidden";

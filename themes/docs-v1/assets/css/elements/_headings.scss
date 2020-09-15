@@ -4,7 +4,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--heading-weight);
+  font-weight: var(--headings-weight);
+  color: var(--headings-color, inherit);
   margin-bottom: var(--space);
 }
 
