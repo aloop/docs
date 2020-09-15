@@ -16,13 +16,14 @@
     max-height: calc(100% - var(--nav-icon-full-size));
     padding-top: var(--space);
     opacity: 0;
-    transition: transform var(--nav-transition-props),
-      opacity var(--nav-transition-props);
+    visibility: hidden;
+    transition: all var(--nav-transition-props);
 
     .NavContainer.is-open &,
     .no-js .NavContainer:focus-within & {
       transform: translateX(100%);
       opacity: 1;
+      visibility: visible;
     }
   }
 }

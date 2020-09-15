@@ -4,8 +4,8 @@ if ("serviceWorker" in navigator) {
 }
 
 // Setup handlers for opening and closing navigation
-const navContainer = document.querySelector("#nav-container");
-const toggle = document.querySelector("#nav-toggle");
+const navContainer = document.getElementById("nav-container-9cc6478e");
+const toggle = document.getElementById("nav-toggle-b9b1766c");
 
 if (navContainer !== null && toggle !== null) {
   const openClassName = "is-open";
@@ -16,6 +16,7 @@ if (navContainer !== null && toggle !== null) {
   const closeNav = () => {
     if (hasClass()) {
       removeClass();
+      toggle.setAttribute("aria-expanded", false);
     }
   };
 
@@ -27,7 +28,7 @@ if (navContainer !== null && toggle !== null) {
 
   const closeOnClick = ({ target }) => {
     if (hasClass() && !navContainer.contains(target)) {
-      removeClass();
+      closeNav();
     }
   };
 
@@ -35,6 +36,7 @@ if (navContainer !== null && toggle !== null) {
 
   toggle.addEventListener("click", async () => {
     navContainer.classList.toggle(openClassName);
+    toggle.setAttribute("aria-expanded", hasClass());
 
     if (navContainer.classList.contains(openClassName)) {
       window.addEventListener("resize", closeNav, resizeOpts);
