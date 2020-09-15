@@ -1,4 +1,4 @@
-.Content {
+.c-Content {
   min-width: 0;
   width: 100%;
   max-width: var(--content-max-width, 100%);
@@ -11,7 +11,7 @@
   --headings-color: var(--content-headings-color);
 }
 
-.Content p > code {
+.c-Content p > code {
   background-color: var(--code-bg);
   color: var(--code-color);
   border-radius: rem(5);
@@ -20,7 +20,7 @@
   font-size: em(14);
 }
 
-.Content-title {
+.c-Content-title {
   color: var(--content-title-color);
   font-size: unquote("max(var(--h1-size), min(calc(0.5em + 4vw), 3rem))");
 }

@@ -1,4 +1,4 @@
-.Nav {
+.c-Nav {
   background-color: var(--nav-bg);
   position: relative;
   height: 100%;
@@ -19,8 +19,8 @@
     visibility: hidden;
     transition: all var(--nav-transition-props);
 
-    .NavContainer.is-open &,
-    .no-js .NavContainer:focus-within & {
+    .c-NavContainer.is-open &,
+    .no-js .c-NavContainer:focus-within & {
       transform: translateX(100%);
       opacity: 1;
       visibility: visible;
@@ -28,11 +28,11 @@
   }
 }
 
-.Nav-section {
+.c-Nav-section {
   margin: calc(var(--space) * 1.5) 0;
 }
 
-.Nav-section-title {
+.c-Nav-section-title {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
@@ -40,16 +40,16 @@
   margin-bottom: calc(var(--space) / 2);
 }
 
-.Nav-list {
+.c-Nav-list {
   list-style-type: none;
 
-  .Nav-list {
+  .c-Nav-list {
     padding-left: 0;
     margin-bottom: 0;
   }
 }
 
-.Nav-list-item {
+.c-Nav-list-item {
   margin-bottom: calc(var(--space) / 3);
 
   &:last-of-type {
@@ -57,7 +57,7 @@
   }
 }
 
-.Nav-list-link {
+.c-Nav-list-link {
   color: var(--nav-link-color);
   text-decoration: none;
   display: block;

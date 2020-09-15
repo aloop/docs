@@ -1,12 +1,12 @@
-.Main {
+.c-Main {
   grid-area: main;
   margin: var(--main-margin);
 
   @media screen and (max-width: ($nav-media-query-width - rem(1))) {
     transition: transform var(--nav-transition-props);
 
-    .NavContainer.is-open ~ &,
-    .no-js .NavContainer:focus-within ~ & {
+    .c-NavContainer.is-open ~ &,
+    .no-js .c-NavContainer:focus-within ~ & {
       transform: translateX(
         calc(
           var(--nav-width) -

@@ -1,10 +1,10 @@
 {{ define "main" }}
-  <article class="Content" id="content-434728a4">
+  <article class="c-Content" id="content-434728a4">
     <aside>
       {{- partial "breadcrumbs.html" . -}}
     </aside>
     <header>
-      <h1 class="Content-title">{{ .Title }}</h1>
+      <h1 class="c-Content-title">{{ .Title }}</h1>
     </header>
 
     {{ .Content }}
@@ -12,7 +12,7 @@
     {{- if gt (len .RegularPages) 0 }}
     <ul>
       {{- range .RegularPages -}}
-      <li class=''>
+      <li>
         <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Name }}</a>
         {{- if .Description -}}
         <p>{{ .Description }}</p>

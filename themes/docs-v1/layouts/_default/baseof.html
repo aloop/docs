@@ -42,11 +42,11 @@
     {{ end -}}
 
     {{- block "skip-content-link" . }}
-      <a href="#content-434728a4" class="SkipToContent u-visuallyHidden is-focusable">Skip to content</a>
+      <a href="#content-434728a4" class="c-SkipToContent u-visuallyHidden is-focusable">Skip to content</a>
     {{ end -}}
 
     {{- block "header" . }}
-    <header class="SiteHeader">
+    <header class="c-SiteHeader">
       {{- block "header-inside" . }}
         {{- partial "header.html" . -}}
       {{ end -}}
@@ -57,7 +57,7 @@
       {{- partial "navigation.html" . -}}
     {{ end -}}
 
-    <main class="Main">
+    <main class="c-Main">
       {{- block "main" . }}{{ end -}}
     </main>
   </body>

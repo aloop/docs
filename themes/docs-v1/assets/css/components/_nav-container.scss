@@ -1,9 +1,9 @@
-.NavContainer {
+.c-NavContainer {
   position: relative;
   grid-area: nav;
 }
 
-.NavContainer-toggle {
+.c-NavContainer-toggle {
   position: sticky;
   top: 0;
   left: 0;
@@ -20,11 +20,11 @@
   transition: transform var(--nav-transition-props);
 
   .is-open &,
-  .no-js .NavContainer:focus-within & {
+  .no-js .c-NavContainer:focus-within & {
     transform: translateX(calc(var(--space) - var(--nav-icon-spacing)));
   }
 
-  .no-js .NavContainer:focus-within & {
+  .no-js .c-NavContainer:focus-within & {
     pointer-events: none;
   }
 
@@ -33,7 +33,7 @@
   }
 }
 
-.NavContainer-icon {
+.c-NavContainer-icon {
   --bar-gap: calc((var(--nav-icon-size) / 2 - #{rem(2)}));
 
   &,
@@ -58,17 +58,17 @@
   }
 
   .is-open &,
-  .no-js .NavContainer:focus-within & {
+  .no-js .c-NavContainer:focus-within & {
     background-color: transparent;
   }
 
   .is-open &::before,
-  .no-js .NavContainer:focus-within &::before {
+  .no-js .c-NavContainer:focus-within &::before {
     transform: translateX(-50%) rotate(225deg) scale(1.25);
   }
 
   .is-open &::after,
-  .no-js .NavContainer:focus-within &::after {
+  .no-js .c-NavContainer:focus-within &::after {
     transform: translateX(-50%) rotate(-225deg) scale(1.25);
   }
 }
