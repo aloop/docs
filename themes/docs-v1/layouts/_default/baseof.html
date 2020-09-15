@@ -41,6 +41,10 @@
     </script>
     {{ end -}}
 
+    {{- block "skip-content-link" . }}
+      <a href="#content-434728a4" class="SkipToContent u-visuallyHidden is-focusable">Skip to content</a>
+    {{ end -}}
+
     {{- block "header" . }}
     <header class="SiteHeader">
       {{- block "header-inside" . }}

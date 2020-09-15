@@ -1,0 +1,20 @@
+.SkipToContent {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin: 0 auto;
+  text-align: center;
+  transform: translate(-50%, -100%);
+  transition: transform 100ms ease-in-out;
+  background: var(--skip-to-content-bg);
+  color: var(--skip-to-content-color);
+  padding: rem(6) rem(10);
+  border-radius: 0 0 rem(4) rem(4);
+
+  &:active,
+  &:focus,
+  &:focus-within {
+    color: var(--skip-to-content-color);
+    transform: translate(-50%, 0);
+  }
+}
