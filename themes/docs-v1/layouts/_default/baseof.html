@@ -34,8 +34,8 @@
 
     {{ block "head" . }}{{ end }}
   </head>
-  <body>
-    {{- with resources.Get "js/head-inline.js" | minify }}
+  <body tabindex="-1">
+    {{- with resources.Get "js/head-inline.js" | js.Build $jsOptions }}
     <script>
       {{ .Content | safeJS }}
     </script>

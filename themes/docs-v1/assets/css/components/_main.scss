@@ -5,7 +5,8 @@
   @media screen and (max-width: ($nav-media-query-width - rem(1))) {
     transition: transform var(--nav-transition-props);
 
-    .NavContainer.is-open ~ & {
+    .NavContainer.is-open ~ &,
+    .no-js .NavContainer:focus-within ~ & {
       transform: translateX(
         calc(
           var(--nav-width) -

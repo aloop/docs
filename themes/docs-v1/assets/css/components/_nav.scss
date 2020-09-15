@@ -7,17 +7,20 @@
   padding-right: var(--space);
   font-size: rem(16);
   line-height: 1.2;
+  outline: none;
 
   @media screen and (max-width: ($nav-media-query-width - rem(1))) {
     position: absolute;
-    top: 0;
+    top: var(--nav-icon-full-size);
     right: 100%;
-    padding-top: calc(var(--nav-icon-full-size) + var(--space));
+    max-height: calc(100% - var(--nav-icon-full-size));
+    padding-top: var(--space);
     opacity: 0;
     transition: transform var(--nav-transition-props),
       opacity var(--nav-transition-props);
 
-    .NavContainer.is-open & {
+    .NavContainer.is-open &,
+    .no-js .NavContainer:focus-within & {
       transform: translateX(100%);
       opacity: 1;
     }

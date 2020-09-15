@@ -4,11 +4,13 @@
 }
 
 .NavContainer-toggle {
+  position: sticky;
+  top: 0;
+  left: 0;
   -webkit-appearance: none;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  position: relative;
   display: flex;
   align-items: center;
   padding: var(--nav-icon-spacing);
@@ -17,8 +19,13 @@
   height: var(--nav-icon-full-size);
   transition: transform var(--nav-transition-props);
 
-  .is-open & {
+  .is-open &,
+  .no-js .NavContainer:focus-within & {
     transform: translateX(calc(var(--space) - var(--nav-icon-spacing)));
+  }
+
+  .no-js .NavContainer:focus-within & {
+    pointer-events: none;
   }
 
   @media screen and (min-width: $nav-media-query-width) {
@@ -50,15 +57,18 @@
     transform: translate(-50%, var(--bar-gap));
   }
 
-  .is-open & {
+  .is-open &,
+  .no-js .NavContainer:focus-within & {
     background-color: transparent;
   }
 
-  .is-open &::before {
+  .is-open &::before,
+  .no-js .NavContainer:focus-within &::before {
     transform: translateX(-50%) rotate(225deg) scale(1.25);
   }
 
-  .is-open &::after {
+  .is-open &::after,
+  .no-js .NavContainer:focus-within &::after {
     transform: translateX(-50%) rotate(-225deg) scale(1.25);
   }
 }
