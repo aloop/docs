@@ -39,7 +39,8 @@
   --link-color-active: var(--tag-color-active);
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-within {
     background-color: var(--tag-bg-active);
     color: var(--tag-color-active);
   }
