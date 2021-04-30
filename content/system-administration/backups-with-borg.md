@@ -48,7 +48,7 @@ sudo passwd -l borg
 
 ### Create Backups Folder
 
-```
+```sh
 sudo mkdir /backup/path
 sudo chown borg:borg /backup/path
 sudo chmod u+rwX,g+rX,o-rwx /backup/path
@@ -122,23 +122,25 @@ borg create                         \
 
 backup_exit=$?
 
-info "Pruning repository"
+if [ ${backup_exit} -eq 0 ]; then
+    info "Pruning repository"
 
-# Use the `prune` subcommand to maintain 48 hourly, 7 daily, 4 weekly and 6 monthly
-# archives of THIS machine. The '{hostname}-' prefix is very important to
-# limit prune's operation to this machine's archives and not apply to
-# other machines' archives also:
+    # Use the `prune` subcommand to maintain 48 hourly, 7 daily, 4 weekly and 6 monthly
+    # archives of THIS machine. The '{hostname}-' prefix is very important to
+    # limit prune's operation to this machine's archives and not apply to
+    # other machines' archives also:
 
-borg prune                          \
-    --list                          \
-    --prefix '{hostname}-'          \
-    --show-rc                       \
-    --keep-hourly   48              \
-    --keep-daily    7               \
-    --keep-weekly   4               \
-    --keep-monthly  6               \
+    borg prune                          \
+        --list                          \
+        --prefix '{hostname}-'          \
+        --show-rc                       \
+        --keep-hourly   48              \
+        --keep-daily    7               \
+        --keep-weekly   4               \
+        --keep-monthly  6               \
 
-prune_exit=$?
+    prune_exit=$?
+fi
 
 # use highest exit code as global exit code
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
