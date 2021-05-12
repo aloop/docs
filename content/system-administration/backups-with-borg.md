@@ -118,7 +118,7 @@ borg create                         \
     /etc                            \
     /home                           \
     /root                           \
-    /var                            \
+    /var
 
 backup_exit=$?
 
@@ -137,7 +137,7 @@ if [ ${backup_exit} -eq 0 ]; then
         --keep-hourly   48              \
         --keep-daily    7               \
         --keep-weekly   4               \
-        --keep-monthly  6               \
+        --keep-monthly  6
 
     prune_exit=$?
 fi
