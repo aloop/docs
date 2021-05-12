@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ .Site.LanguageCode }}">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#4d33cc" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4d33cc">
 
     {{- block "meta" . }}{{ end }}
     <title>
@@ -16,12 +16,12 @@
         {{ end -}}
       {{ end -}}
     </title>
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="data:,">
 
     {{ $sassOptions := (dict "enableSourceMap" (not hugo.IsProduction)) }}
     {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS | fingerprint "sha256" -}}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 
     {{ $jsDefines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
     {{ $jsOptions := (dict "bundle" true "minify" true "sourceMap" (cond hugo.IsProduction "" "inline") "defines" $jsDefines) }}
