@@ -32,7 +32,7 @@ if (navContainer !== null && toggle !== null) {
     }
   };
 
-  resizeOpts = { once: true };
+  const resizeOpts = { once: true };
 
   toggle.addEventListener("click", async () => {
     navContainer.classList.toggle(openClassName);
