@@ -18,6 +18,10 @@ if HUGO_ENV=production hugo --gc --minify --cleanDestinationDir=true; then
       if command -v gzip > /dev/null 2>&1; then
         gzip --keep --best "$uncompressed_file"
       fi
+
+      if command -v zstd > /dev/null 2>&1; then
+        zstd --compress --keep -9 "$uncompressed_file"
+      fi
     fi
   done
 
