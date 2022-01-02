@@ -109,10 +109,10 @@ borg create                         \
     --exclude-caches                \
     --exclude '/home/*/.cache/*'    \
     --exclude '/var/tmp/*'          \
-    --exclude="/var/cache/*"        \
-    --exclude="/var/lock/*"         \
-    --exclude="/var/log/*"          \
-    --exclude="/var/run/*"          \
+    --exclude '/var/cache/*'        \
+    --exclude '/var/lock/*'         \
+    --exclude '/var/log/*'          \
+    --exclude '/var/run/*'          \
                                     \
     ::'{hostname}-{now}'            \
     /etc                            \
