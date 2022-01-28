@@ -68,6 +68,9 @@ BindReadOnlyPaths=/etc/webhooks /etc/resolv.conf /etc/ssl/
 CapabilityBoundingSet=
 AmbientCapabilities=
 NoNewPrivileges=true
+
+SocketBindDeny=any
+SocketBindAllow=ipv4:tcp:9000
 ```
 
 Then create a file at `/etc/webhooks/hooks.json`
@@ -178,6 +181,9 @@ AmbientCapabilities=
 
 [Install]
 WantedBy=multi-user.target
+
+SocketBindAllow=
+SocketBindDeny=any
 ```
 
 ## systemd .path template unit
