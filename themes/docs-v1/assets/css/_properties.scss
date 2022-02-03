@@ -1,9 +1,10 @@
 html {
   // Font
-  --font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-monospace: "Roboto Mono", Monaco, Consolas, Andale Mono, Ubuntu Mono,
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Roboto",
+    "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-monospace: ui-monospace, "Cascadia Code", "Cascadia Mono",
+    "Segoe UI Mono", "Roboto Mono", "Liberation Mono", Menlo, Monaco, Consolas,
     monospace;
   --content-font-size: #{rem(16)};
   --line-height: 1.6;
