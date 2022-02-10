@@ -18,6 +18,10 @@ const NETWORK_FIRST_TYPES = ["document"];
 
 const HEADERS_TO_COMPARE = ["Content-Length", "ETag", "Last-Modified"];
 
+const state = {
+  online: true,
+};
+
 async function activate() {
   if ("navigationPreload" in self.registration) {
     await self.registration.navigationPreload.enable();
@@ -86,7 +90,7 @@ async function fetchResponder(event) {
   const cachedResponse = await cache.match(event.request);
   const networkResponse = fetchFromNetwork(event, cache, cachedResponse);
 
-  if (NETWORK_FIRST_TYPES.includes(event.request.destination)) {
+  if (state.online && NETWORK_FIRST_TYPES.includes(event.request.destination)) {
     return networkResponse || cachedResponse;
   }
 
@@ -116,4 +120,10 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(fetchResponder(event));
+});
+
+self.addEventListener("message", (event) => {
+  if ("networkStatus" in event.data) {
+    state.online = event.data.networkStatus;
+  }
 });
