@@ -20,7 +20,7 @@
     <link rel="icon" href="data:,">
 
     {{ $sassOptions := (dict "enableSourceMap" (not hugo.IsProduction)) }}
-    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS | fingerprint "sha256" -}}
+    {{ $style := resources.Get "css/styles.scss" | toCSS $sassOptions | postCSS | resources.Minify | fingerprint "sha256" -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 
     {{ $jsDefines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
