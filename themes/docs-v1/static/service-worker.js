@@ -1,7 +1,7 @@
-const CACHE_VERSION = "1";
+const CACHE_VERSION = "2";
 const OFFLINE_PAGE_URL = "/offline.html";
 const CACHES = {
-  offline: `offline-v${CACHE_VERSION}`,
+  primary: `primary-v${CACHE_VERSION}`,
 };
 const CACHE_NAMES = Object.values(CACHES);
 
@@ -13,9 +13,12 @@ const CACHE_TYPES = [
   "manifest",
   "font",
 ];
-const CACHE_FIRST_TYPES = ["document"];
 
-const activate = async () => {
+const NETWORK_FIRST_TYPES = ["document"];
+
+const HEADERS_TO_COMPARE = ["Content-Length", "ETag", "Last-Modified"];
+
+async function activate() {
   if ("navigationPreload" in self.registration) {
     await self.registration.navigationPreload.enable();
   }
@@ -30,56 +33,72 @@ const activate = async () => {
     }),
     self.clients.claim(),
   ]);
-};
+}
 
-const fetchFromNetwork = async (event, cache) => {
-  let response;
+function doCacheHeadersMatch(
+  cachedResponse,
+  networkResponse,
+  headers = HEADERS_TO_COMPARE
+) {
+  return (
+    !cachedResponse ||
+    headers.some((header) => {
+      return (
+        cachedResponse.headers.get(header) !==
+        networkResponse.headers.get(header)
+      );
+    })
+  );
+}
+
+async function fetchFromNetwork(event, cache, cachedResponse) {
+  let networkResponse;
 
   try {
     if ("preloadResponse" in event) {
-      response = await event.preloadResponse;
+      networkResponse = await event.preloadResponse;
     }
 
-    if (!response) {
-      response = await fetch(event.request);
+    if (!networkResponse) {
+      networkResponse = await fetch(event.request);
     }
   } catch {
     // Fetch should only throw when it gets an invalid response of some sort,
     // so when it does we'll try to serve the page from the cache, otherwise
     // show our offline page.
-    return (await cache.match(event.request)) || cache.match(OFFLINE_PAGE_URL);
+    return cachedResponse || cache.match(OFFLINE_PAGE_URL);
   }
 
   if (
-    response.status === 200 &&
-    CACHE_TYPES.includes(event.request.destination)
+    networkResponse.status === 200 &&
+    CACHE_TYPES.includes(event.request.destination) &&
+    doCacheHeadersMatch(cachedResponse, networkResponse)
   ) {
-    const clonedResponse = response.clone();
-    await cache.put(event.request, clonedResponse);
+    cache.put(event.request, networkResponse.clone());
   }
 
-  return response;
-};
+  return networkResponse;
+}
 
-const fetchResponder = async (event) => {
-  const cache = await caches.open(CACHES.offline);
+async function fetchResponder(event) {
+  const cache = await caches.open(CACHES.primary);
 
-  const response = fetchFromNetwork(event, cache);
+  const cachedResponse = await cache.match(event.request);
+  const networkResponse = fetchFromNetwork(event, cache, cachedResponse);
 
-  // Do network-first requests on documents, cache-first on everything else
-  if (CACHE_FIRST_TYPES.includes(event.request.destination)) {
-    return response || cache.match(event.request);
+  if (NETWORK_FIRST_TYPES.includes(event.request.destination)) {
+    return networkResponse || cachedResponse;
   }
 
-  return (await cache.match(event.request)) || response;
-};
+  return cachedResponse || networkResponse;
+}
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
 
   event.waitUntil(
     caches
-      .open(CACHES.offline)
+      .open(CACHES.primary)
       .then((cache) => cache.addAll([OFFLINE_PAGE_URL]))
   );
 });
