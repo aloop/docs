@@ -7,7 +7,7 @@ shopt -s globstar
 echo "Installing npm packages..."
 NODE_ENV=production npm ci
 
-if HUGO_ENV=production hugo --gc --minify --cleanDestinationDir=true; then
+if HUGO_ENV=production hugo --minify --cleanDestinationDir; then
   # Try to compress the files ahead of time so the webserver can do less work
   for uncompressed_file in dist/**/*.{html,css,js,mjs,json,svg,xml}; do
     if [ -e "$uncompressed_file" ] && [ ! -d "$uncompressed_file" ]; then
