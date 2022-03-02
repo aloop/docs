@@ -22,18 +22,20 @@
       {{- range .Site.Sections -}}
         {{- if gt (len .RegularPages) 0 }}
           <li class="c-Nav-section">
-            <div class="c-Nav-section-title">{{ .Name }}</div>
-            <ul class="c-Nav-list">
-              {{- range .RegularPages -}}
-                <li class="c-Nav-list-item">
-                  <a
-                    href="{{ .RelPermalink }}"
-                    title="{{ .LinkTitle }}"
-                    class="c-Nav-list-link {{- if eq . $currentPage }} is-current{{ end }}"
-                  >{{ .Name }}</a>
-                </li>
-              {{- end -}}
-            </ul>
+            <details open>
+              <summary class="c-Nav-section-title">{{ .Name }}</summary>
+              <ul class="c-Nav-list">
+                {{- range .RegularPages -}}
+                  <li class="c-Nav-list-item">
+                    <a
+                      href="{{ .RelPermalink }}"
+                      title="{{ .LinkTitle }}"
+                      class="c-Nav-list-link {{- if eq . $currentPage }} is-current{{ end }}"
+                    >{{ .Name }}</a>
+                  </li>
+                {{- end -}}
+              </ul>
+            </details>
           </li>
         {{- end -}}
       {{- end -}}
