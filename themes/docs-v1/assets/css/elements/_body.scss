@@ -10,9 +10,7 @@ body {
   overflow-x: hidden;
 
   display: grid;
-  grid-template-areas:
-    "header header"
-    "nav main";
+  grid-template-areas: "nav main";
   grid-template-rows: auto 1fr;
   grid-template-columns: auto minmax(0, 1fr);
 }
