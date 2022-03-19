@@ -1,4 +1,4 @@
-const CACHE_VERSION = "2";
+const CACHE_VERSION = "3";
 const OFFLINE_PAGE_URL = "/offline.html";
 const CACHES = {
   primary: `primary-v${CACHE_VERSION}`,

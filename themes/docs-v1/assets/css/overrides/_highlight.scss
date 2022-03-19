@@ -1,6 +1,7 @@
 .highlight {
   line-height: var(--code-line-height);
   margin-bottom: var(--p-margin);
+  display: grid;
 }
 
 .chroma {
@@ -8,7 +9,11 @@
   font-family: var(--font-monospace);
   font-size: em(14);
   padding: calc(var(--space) / 2);
-  border-radius: 5px;
+  border-radius: rem(5);
   overflow: auto;
   box-shadow: var(--content-box-shadow);
+
+  .highlight.has-copy-button > & {
+    border-top-right-radius: 0;
+  }
 }

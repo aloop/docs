@@ -1,0 +1,28 @@
+.c-Copy {
+  position: relative;
+  z-index: 2; // Prevents drop shadow from showing up over background
+
+  margin-left: auto;
+  padding: rem(5) rem(10);
+
+  font-family: var(--font);
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: lowercase;
+
+  background-color: var(--copy-button-bg);
+  color: var(--copy-button-color);
+
+  border: rem(2) solid var(--copy-button-border-color);
+  border-bottom-width: 0;
+  border-top-left-radius: rem(5);
+  border-top-right-radius: rem(5);
+
+  transition: all 100ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: var(--copy-button-color-active);
+    background-color: var(--copy-button-bg-active);
+  }
+}

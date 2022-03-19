@@ -54,6 +54,11 @@ html {
   --tag-bg: var(--link-color);
   --tag-color-active: var(--tag-color);
   --tag-bg-active: var(--link-color-active);
+  --copy-button-bg: transparent;
+  --copy-button-bg-active: var(--code-bg);
+  --copy-button-border-color: var(--code-bg);
+  --copy-button-color: var(--color);
+  --copy-button-color-active: #fff;
   // Animations
   --nav-transition-props: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
@@ -71,6 +76,7 @@ html {
     --content-headings-color: inherit;
     --last-updated-color: rgba(255, 255, 255, 0.6);
     --tag-color: #000;
+    --copy-button-color-active: var(--color);
   }
 }
 
