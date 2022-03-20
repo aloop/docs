@@ -1,0 +1,14 @@
+.c-TOC {
+  margin-bottom: var(--space);
+}
+
+.c-TOC-title {
+  font-weight: bold;
+  // font-size: rem(18);
+  margin-bottom: calc(var(--space) / 2);
+  cursor: pointer;
+}
+
+.c-TOC-body {
+  padding-left: calc(var(--space) / 2);
+}
