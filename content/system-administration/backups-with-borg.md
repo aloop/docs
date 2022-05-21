@@ -77,8 +77,11 @@ sudo borg init --encryption=repokey-blake2 borg@example.com:/backup/path/client
 The following script is adapted from the [Borg Quick Start](https://borgbackup.readthedocs.io/en/stable/quickstart.html) Documentation.
 
 ```sh
+umask_backup="$(umask)"
+umask 027
 sudo touch /usr/local/bin/borg-backup
-sudo chmod +x /usr/local/bin/borg-backup
+sudo chmod u+x,g+x /usr/local/bin/borg-backup
+umask "${umask_backup}"
 sudo vim /usr/local/bin/borg-backup
 ```
 
@@ -122,28 +125,31 @@ borg create                         \
 
 backup_exit=$?
 
-if [ ${backup_exit} -eq 0 ]; then
-    info "Pruning repository"
+info "Pruning repository"
 
-    # Use the `prune` subcommand to maintain 48 hourly, 7 daily, 4 weekly and 6 monthly
-    # archives of THIS machine. The '{hostname}-' prefix is very important to
-    # limit prune's operation to this machine's archives and not apply to
-    # other machines' archives also:
+# Use the `prune` subcommand to maintain 48 hourly, 7 daily, 4 weekly and 6 monthly
+# archives of THIS machine. The '{hostname}-' prefix is very important to
+# limit prune's operation to this machine's archives and not apply to
+# other machines' archives also:
 
-    borg prune                          \
-        --list                          \
-        --prefix '{hostname}-'          \
-        --show-rc                       \
-        --keep-hourly   48              \
-        --keep-daily    7               \
-        --keep-weekly   4               \
-        --keep-monthly  6
+borg prune                          \
+    --list                          \
+    --prefix '{hostname}-'          \
+    --show-rc                       \
+    --keep-hourly   48              \
+    --keep-daily    7               \
+    --keep-weekly   4               \
+    --keep-monthly  6
 
-    prune_exit=$?
-fi
+prune_exit=$?
+
+borg compact
+
+compact_exit=$?
 
 # use highest exit code as global exit code
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+global_exit=$(( compact_exit > global_exit ? compact_exit : global_exit ))
 
 if [ ${global_exit} -eq 0 ]; then
     info "Backup and Prune finished successfully"
