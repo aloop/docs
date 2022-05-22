@@ -142,9 +142,9 @@ if [ -z "${STATE_DIRECTORY}" ] || [ -z "${CACHE_DIRECTORY}" ] || [ -z "${CONFIGU
 fi
 
 # Tell borg to use the directories we've setup in the systemd service
-BORG_BASE_DIR="${STATE_DIRECTORY}"
-BORG_CACHE_DIR="${CACHE_DIRECTORY}"
-BORG_CONFIG_DIR="${CONFIGURATION_DIRECTORY}"
+export BORG_BASE_DIR="${STATE_DIRECTORY}"
+export BORG_CACHE_DIR="${CACHE_DIRECTORY}"
+export BORG_CONFIG_DIR="${CONFIGURATION_DIRECTORY}"
 
 # Ensure that the backup path starts with a /, this is needed when using relative paths
 # because of the alternate syntax being used to specify a port.
