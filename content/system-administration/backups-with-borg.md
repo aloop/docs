@@ -136,6 +136,16 @@ if [ -z "${BACKUP_PATH}" ]; then
     exit 1
 fi
 
+if [ -z "${STATE_DIRECTORY}" ] || [ -z "${CACHE_DIRECTORY}" ] || [ -z "${CONFIGURATION_DIRECTORY}" ]; then
+    echo "Systemd directories not set. Exiting..."
+    exit 1
+fi
+
+# Tell borg to use the directories we've setup in the systemd service
+BORG_BASE_DIR="${STATE_DIRECTORY}"
+BORG_CACHE_DIR="${CACHE_DIRECTORY}"
+BORG_CONFIG_DIR="${CONFIGURATION_DIRECTORY}"
+
 # Ensure that the backup path starts with a /, this is needed when using relative paths
 # because of the alternate syntax being used to specify a port.
 #
@@ -258,11 +268,14 @@ RestrictAddressFamilies=AF_INET AF_INET6
 RestrictSUIDSGID=yes
 SystemCallArchitectures=native
 
-RuntimeDirectory=borg_backup
-CacheDirectory=borg_backup
+ConfigurationDirectory=borg/hosts/%i
+ConfigurationDirectoryMode=0750
+StateDirectory=borg/hosts/%i
+StateDirectoryMode=0750
+RuntimeDirectory=borg/hosts/%i
+RuntimeDirectoryMode=0750
+CacheDirectory=borg/hosts/%i
 CacheDirectoryMode=0750
-
-BindPaths=/root/.cache/borg/ /root/.config/borg/
 ```
 
 `sudo systemctl edit --full --force borg-backup@.timer`
