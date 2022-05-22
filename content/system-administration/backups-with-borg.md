@@ -127,12 +127,12 @@ if [ -z "${CREDENTIALS_DIRECTORY}" ]; then
 fi
 
 if [ -z "${BACKUP_HOST}" ]; then
-    echo "\$BACKUP_HOST was not set, check /etc/borg/env/${BACKUP_INSTANCE_NAME}.env. exiting..."
+    echo "\$BACKUP_HOST was not set, check /etc/borg/env/${BACKUP_NAME}.env. exiting..."
     exit 1
 fi
 
 if [ -z "${BACKUP_PATH}" ]; then
-    echo "\$BACKUP_PATH was not set, check /etc/borg/env/${BACKUP_INSTANCE_NAME}.env. exiting..."
+    echo "\$BACKUP_PATH was not set, check /etc/borg/env/${BACKUP_NAME}.env. exiting..."
     exit 1
 fi
 
