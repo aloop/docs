@@ -18,7 +18,7 @@ html {
   --p-margin: var(--space);
   --body-padding: calc(var(--space) * 2) 0 0;
   --body-min-width: #{rem(280)};
-  --main-margin: 0 0 calc(var(--space) * 2) 0;
+  --main-margin: 0 calc(var(--space) / 2) calc(var(--space) * 2) 0;
   --content-max-width: #{rem(1200)};
   --content-padding: calc(var(--space) * 0.75);
   --nav-width: #{rem(250)};
