@@ -3,9 +3,8 @@ html {
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Roboto",
     "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  --font-monospace: ui-monospace, "Cascadia Code", "Cascadia Mono",
-    "Segoe UI Mono", "Roboto Mono", "Liberation Mono", Menlo, Monaco, Consolas,
-    monospace;
+  --font-monospace: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono",
+    "Liberation Mono", Menlo, Monaco, Consolas, monospace;
   --content-font-size: #{rem(16)};
   --line-height: 1.6;
   --code-line-height: 1.4;
