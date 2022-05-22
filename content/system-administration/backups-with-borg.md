@@ -11,11 +11,12 @@ tags:
 
 ## Installation
 
-Most major Linux distrobutions have a package available, we'll assume Ubuntu Server throughout this documentation.
+Most major Linux distributions have a package available, we'll assume Ubuntu Server throughout this documentation.
 
 On both the the system(s) being backed up and the backup server(s), install the following package:
 
 ```sh
+sudo apt update
 sudo apt install borgbackup
 ```
 
@@ -37,7 +38,7 @@ Match User borg Host example.com
 
 ## Server Configuration
 
-This can be skipped if you intend to use a service like [Rsync.net](https://www.rsync.net/products/attic.html).
+This can be skipped if you intend to use a service like [rsync.net](https://www.rsync.net/products/attic.html), follow their directions instead.
 
 ### Create borg user
 
@@ -49,16 +50,20 @@ sudo passwd -l borg
 ### Create Backups Folder
 
 ```sh
-sudo mkdir /backup/path
-sudo chown borg:borg /backup/path
-sudo chmod u+rwX,g+rX,o-rwx /backup/path
+current_umask="$(umask)"
+umask 027
+sudo mkdir /backup/path/client
+sudo chown borg:borg /backup/path/client
+sudo chown borg:borg /backup/path/client
+sudo chmod u+rwX,g+rX,o-rwx /backup/path/client
+umask "$current_umask"
 ```
 
 ### Add Client to SSH authorized_keys
 
 Copy the public key from the ssh keypair you generated earlier to the backup server, editing `/home/borg/.ssh/authorized_keys` so that the entry looks similar to the following:
 
-```
+```sh
 command="cd /backup/path/client; borg serve --restrict-to-path /backup/path/client",restrict ssh-ed25519 AAAAC3N[...] user@host
 ```
 
@@ -72,26 +77,75 @@ You will need one of these entries for each client you intend to give access, wi
 sudo borg init --encryption=repokey-blake2 borg@example.com:/backup/path/client
 ```
 
+### Create key file
+
+This file will be loaded by the systemd service and passed to the backup script as a file located at `${CREDENTIALS_DIRECTORY}/passphrase`.
+Make sure to replace the contents of `BACKUP_NAME`, `BACKUP_HOST`, and `BACKUP_PATH` with proper values, and optionally
+provide values for `BACKUP_USER` and `BACKUP_PORT`.
+
+```sh
+export BACKUP_NAME=somename
+export BACKUP_HOST=127.0.0.1
+export BACKUP_PATH=/backup/path/client
+current_umask="$(umask)"
+umask 077
+sudo mkdir -p /etc/borg/{keys,env}
+sudo vim "/etc/borg/keys/${BACKUP_NAME}.key"
+cat <<EOF | sudo tee "/etc/borg/env/${BACKUP_NAME}.env"
+BACKUP_HOST=$BACKUP_HOST
+BACKUP_PATH=$BACKUP_PATH
+# OPTIONAL - defaults to "borg"
+BACKUP_USER=
+# OPTIONAL - defaults to 22
+BACKUP_PORT=
+EOF
+umask "$current_umask"
+```
+
 ### Backup script
 
 The following script is adapted from the [Borg Quick Start](https://borgbackup.readthedocs.io/en/stable/quickstart.html) Documentation.
 
 ```sh
-umask_backup="$(umask)"
-umask 027
-sudo touch /usr/local/bin/borg-backup
-sudo chmod u+x,g+x /usr/local/bin/borg-backup
-umask "${umask_backup}"
 sudo vim /usr/local/bin/borg-backup
+sudo chmod +x /usr/local/bin/borg-backup
 ```
 
 ```sh
 #!/bin/sh
 
-# Setting this, so the repo does not need to be given on the commandline:
-export BORG_REPO=borg@example.com:/backup/path/client
+###
+### This script has been modified to work in tandem with a systemd unit that sets up
+### the ENV vars and provides the credentials file. Direct usage is not advised.
+###
+### For more info, see: https://docs.aloop.dev/system-administration/backups-with-borg/
+###
 
-export BORG_PASSPHRASE='SOME_PASSPHRASE_HERE'
+if [ -z "${CREDENTIALS_DIRECTORY}" ]; then
+    echo "Credentials not found, exiting..."
+    exit 1
+fi
+
+if [ -z "${BACKUP_HOST}" ]; then
+    echo "\$BACKUP_HOST was not set, check /etc/borg/env/${BACKUP_INSTANCE_NAME}.env. exiting..."
+    exit 1
+fi
+
+if [ -z "${BACKUP_PATH}" ]; then
+    echo "\$BACKUP_PATH was not set, check /etc/borg/env/${BACKUP_INSTANCE_NAME}.env. exiting..."
+    exit 1
+fi
+
+# Ensure that the backup path starts with a /, this is needed when using relative paths
+# because of the alternate syntax being used to specify a port.
+#
+# For more info, see: https://borgbackup.readthedocs.io/en/stable/usage/general.html#repository-urls
+#
+BACKUP_PATH="/${BACKUP_PATH#/}"
+
+export BORG_REPO="ssh://${BACKUP_USER:-borg}@${BACKUP_HOST}:${BACKUP_PORT:-22}${BACKUP_PATH}"
+
+export BORG_PASSCOMMAND="cat ${CREDENTIALS_DIRECTORY}/passphrase"
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
@@ -164,18 +218,25 @@ exit ${global_exit}
 
 ### Systemd Service and Timer
 
-`sudo systemctl edit --full --force borg-backup.service`
+`sudo systemctl edit --full --force borg-backup@.service`
 
 ```ini
 [Unit]
 Description=Borg Backup Service
-After=network.target
+After=network.target network-online.target
+Wants=network.target network-online.target
+AssertPathExists=/etc/borg/keys/%i.key
+AssertPathExists=/etc/borg/env/%i.env
+AssertFileIsExecutable=/usr/local/bin/borg-backup
 
 [Service]
 Type=simple
 Nice=19
 IOSchedulingClass=2
 IOSchedulingPriority=7
+EnvironmentFile=/etc/borg/env/%i.env
+Environment="BACKUP_NAME=%i"
+LoadCredential=passphrase:/etc/borg/keys/%i.key
 ExecStart=/usr/local/bin/borg-backup
 
 NoNewPrivileges=yes
@@ -203,7 +264,7 @@ CacheDirectoryMode=0750
 BindPaths=/root/.cache/borg/ /root/.config/borg/
 ```
 
-`sudo systemctl edit --full --force borg-backup.timer`
+`sudo systemctl edit --full --force borg-backup@.timer`
 
 ```ini
 [Unit]
@@ -211,7 +272,7 @@ Description=Borg Backup Timer
 
 [Timer]
 OnCalendar=hourly
-RandomizedDelaySec=10min
+RandomizedDelaySec=15min
 Persistent=true
 
 [Install]
@@ -223,8 +284,8 @@ If you would like to change the frequency of backups, documentation for systemd 
 Following the creation of the two systemd units, test that the script works by running the service and checking for errors:
 
 ```sh
-sudo systemctl start borg-backup.service
-sudo journalctl -xefu borg-backup.service
+sudo systemctl start borg-backup@BACKUP_NAME.service
+sudo journalctl -xefu borg-backup@BACKUP_NAME.service
 ```
 
-If all goes well, enable the timer: `sudo systemctl enable --now borg-backup.timer`
+If all goes well, enable the and start the timer: `sudo systemctl enable --now borg-backup@BACKUP_NAME.timer`
