@@ -302,4 +302,4 @@ sudo systemctl start borg-backup@BACKUP_NAME.service
 sudo journalctl -xefu borg-backup@BACKUP_NAME.service
 ```
 
-If all goes well, enable the and start the timer: `sudo systemctl enable --now borg-backup@BACKUP_NAME.timer`
+If all goes well, enable and start the timer: `sudo systemctl enable --now borg-backup@BACKUP_NAME.timer`
