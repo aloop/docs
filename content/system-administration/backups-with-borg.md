@@ -22,19 +22,40 @@ sudo apt install borgbackup
 
 ## Initial Client Configuration
 
+### Create config directories and files
+
+This file will be loaded by the systemd service and passed to the backup script as a file located at `${CREDENTIALS_DIRECTORY}/passphrase`.
+Make sure to replace the contents of `BACKUP_NAME`, `BACKUP_HOST`, and `BACKUP_PATH` with proper values, and optionally
+provide values for `BACKUP_USER` and `BACKUP_PORT`.
+
+```sh
+export BACKUP_NAME=somename
+export BACKUP_HOST=127.0.0.1
+export BACKUP_PATH=/backup/path/client
+current_umask="$(umask)"
+umask 077
+sudo mkdir -p "/etc/borg/targets/${BACKUP_NAME}"
+sudo vim "/etc/borg/targets/${BACKUP_NAME}/passphrase"
+cat <<EOF | sudo tee "/etc/borg/targets/${BACKUP_NAME}/env"
+BACKUP_HOST=$BACKUP_HOST
+BACKUP_PATH=$BACKUP_PATH
+# OPTIONAL - defaults to "borg"
+BACKUP_USER=
+# OPTIONAL - defaults to 22
+BACKUP_PORT=
+EOF
+umask "$current_umask"
+```
+
+### Creating an SSH Key
+
 Create an ssh keypair without a passphrase for the root account on your client(s):
 
 ```sh
-sudo ssh-keygen -t ed25519
+sudo ssh-keygen -t ed25519 -f "/etc/borg/targets/${BACKUP_NAME}/id_${BACKUP_NAME}"
 ```
 
-If you change the default file location for the key from `/root/.ssh/id_ed25519` to something else, you may need to configure the `/root/.ssh/config` file like so:
-
-```
-Match User borg Host example.com
-    IdentitiesOnly yes
-    IdentityFile /root/.ssh/borg_backup_key
-```
+Make sure to replace `${BACKUP_NAME}` with the name you will use for this backup target
 
 ## Server Configuration
 
@@ -64,7 +85,7 @@ umask "$current_umask"
 Copy the public key from the ssh keypair you generated earlier to the backup server, editing `/home/borg/.ssh/authorized_keys` so that the entry looks similar to the following:
 
 ```sh
-command="cd /backup/path/client; borg serve --restrict-to-path /backup/path/client",restrict ssh-ed25519 AAAAC3N[...] user@host
+command="mkdir -p /backup/path/client && cd /backup/path/client && borg serve --restrict-to-path /backup/path/client",restrict ssh-ed25519 AAAAC3N[...] user@host
 ```
 
 You will need one of these entries for each client you intend to give access, with a different path for each client.
@@ -75,31 +96,6 @@ You will need one of these entries for each client you intend to give access, wi
 
 ```sh
 sudo borg init --encryption=repokey-blake2 borg@example.com:/backup/path/client
-```
-
-### Create key file
-
-This file will be loaded by the systemd service and passed to the backup script as a file located at `${CREDENTIALS_DIRECTORY}/passphrase`.
-Make sure to replace the contents of `BACKUP_NAME`, `BACKUP_HOST`, and `BACKUP_PATH` with proper values, and optionally
-provide values for `BACKUP_USER` and `BACKUP_PORT`.
-
-```sh
-export BACKUP_NAME=somename
-export BACKUP_HOST=127.0.0.1
-export BACKUP_PATH=/backup/path/client
-current_umask="$(umask)"
-umask 077
-sudo mkdir -p /etc/borg/{keys,env}
-sudo vim "/etc/borg/keys/${BACKUP_NAME}.key"
-cat <<EOF | sudo tee "/etc/borg/env/${BACKUP_NAME}.env"
-BACKUP_HOST=$BACKUP_HOST
-BACKUP_PATH=$BACKUP_PATH
-# OPTIONAL - defaults to "borg"
-BACKUP_USER=
-# OPTIONAL - defaults to 22
-BACKUP_PORT=
-EOF
-umask "$current_umask"
 ```
 
 ### Backup script
@@ -127,12 +123,12 @@ if [ -z "${CREDENTIALS_DIRECTORY}" ]; then
 fi
 
 if [ -z "${BACKUP_HOST}" ]; then
-    echo "\$BACKUP_HOST was not set, check /etc/borg/env/${BACKUP_NAME}.env. exiting..."
+    echo "\$BACKUP_HOST was not set, check /etc/borg/targets/${BACKUP_NAME}/env. exiting..."
     exit 1
 fi
 
 if [ -z "${BACKUP_PATH}" ]; then
-    echo "\$BACKUP_PATH was not set, check /etc/borg/env/${BACKUP_NAME}.env. exiting..."
+    echo "\$BACKUP_PATH was not set, check /etc/borg/targets/${BACKUP_NAME}/env. exiting..."
     exit 1
 fi
 
@@ -156,6 +152,9 @@ BACKUP_PATH="/${BACKUP_PATH#/}"
 export BORG_REPO="ssh://${BACKUP_USER:-borg}@${BACKUP_HOST}:${BACKUP_PORT:-22}${BACKUP_PATH}"
 
 export BORG_PASSCOMMAND="cat ${CREDENTIALS_DIRECTORY}/passphrase"
+
+# Make sure borg uses the correct ssh key
+export BORG_RSH="ssh -i /etc/borg/targets/${BACKUP_NAME}/id_${BACKUP_NAME}"
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
@@ -236,8 +235,9 @@ exit ${global_exit}
 Description=Borg Backup Service
 After=network.target network-online.target
 Wants=network.target network-online.target
-AssertPathExists=/etc/borg/keys/%i.key
-AssertPathExists=/etc/borg/env/%i.env
+AssertPathExists=/etc/borg/targets/%i/passphrase
+AssertPathExists=/etc/borg/targets/%i/env
+AssertPathExists=/etc/borg/targets/%i/id_%i
 AssertFileIsExecutable=/usr/local/bin/borg-backup
 
 [Service]
@@ -245,9 +245,9 @@ Type=simple
 Nice=19
 IOSchedulingClass=2
 IOSchedulingPriority=7
-EnvironmentFile=/etc/borg/env/%i.env
+EnvironmentFile=/etc/borg/targets/%i/env
 Environment="BACKUP_NAME=%i"
-LoadCredential=passphrase:/etc/borg/keys/%i.key
+LoadCredential=passphrase:/etc/borg/targets/%i/passphrase
 ExecStart=/usr/local/bin/borg-backup
 
 NoNewPrivileges=yes
@@ -268,13 +268,13 @@ RestrictAddressFamilies=AF_INET AF_INET6
 RestrictSUIDSGID=yes
 SystemCallArchitectures=native
 
-ConfigurationDirectory=borg/hosts/%i
+ConfigurationDirectory=borg/targets/%i
 ConfigurationDirectoryMode=0750
-StateDirectory=borg/hosts/%i
+StateDirectory=borg/targets/%i
 StateDirectoryMode=0750
-RuntimeDirectory=borg/hosts/%i
+RuntimeDirectory=borg/targets/%i
 RuntimeDirectoryMode=0750
-CacheDirectory=borg/hosts/%i
+CacheDirectory=borg/targets/%i
 CacheDirectoryMode=0750
 ```
 
