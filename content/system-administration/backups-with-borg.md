@@ -268,7 +268,7 @@ RestrictAddressFamilies=AF_INET AF_INET6
 RestrictSUIDSGID=yes
 SystemCallArchitectures=native
 
-ConfigurationDirectory=borg/targets/%i
+ConfigurationDirectory=borg/configuration/%i
 ConfigurationDirectoryMode=0750
 StateDirectory=borg/targets/%i
 StateDirectoryMode=0750
