@@ -20,6 +20,25 @@
   font-size: em(14);
 }
 
+.c-Content :where(h1, h2, h3, h4, h5, h6)::before {
+  content: "> ";
+  color: var(--link-color);
+  font-weight: bold;
+  display: none;
+}
+
+.c-Content :where(h1, h2, h3, h4, h5, h6):target {
+  &,
+  & a {
+    text-decoration: underline solid rem(2) var(--link-color);
+    text-underline-position: under;
+  }
+}
+
+.c-Content :where(h1, h2, h3, h4, h5, h6):target::before {
+  display: inline;
+}
+
 .c-Content-title {
   color: var(--content-title-color);
   font-size: unquote("max(var(--h1-size), min(calc(0.5em + 4vw), 3rem))");
