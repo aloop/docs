@@ -179,11 +179,11 @@ BindReadOnlyPaths=/var/www/.ssh/ /etc/ssl
 CapabilityBoundingSet=
 AmbientCapabilities=
 
-[Install]
-WantedBy=multi-user.target
-
 SocketBindAllow=
 SocketBindDeny=any
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 ## systemd .path template unit
