@@ -2,12 +2,13 @@ button,
 input,
 textarea,
 select {
-  font-family: inherit;
+  font: inherit;
+  line-height: inherit;
 }
 
 label,
 button,
-input[type="checkbox"] {
+input:where([type="checkbox"]) {
   cursor: pointer;
 }
 

@@ -3,8 +3,8 @@ a {
   color: var(--link-color);
   text-decoration: underline;
 
-  &:hover,
-  &:focus {
+  &:where(:hover),
+  &:where(:focus) {
     color: var(--link-color-active);
     text-decoration: none;
   }
