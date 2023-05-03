@@ -18,7 +18,7 @@ This is was created for Ubuntu Server, other distros may have different director
 
 ## Packages
 
-```bash
+```sh
 sudo apt install webhook
 ```
 
@@ -202,7 +202,7 @@ After creating the systemd files above, make sure to run `sudo systemctl daemon-
 Assuming that a git repo that has a `build.sh` script for building a site resides at `/var/www/YOUR_SITE_HERE/`,
 and that you have configured a webhook which executes `touch /var/lib/webhooks/YOUR_SITE_HERE`, you can simply execute the following:
 
-```
+```sh
 sudo systemctl enable --now static-site-build@YOUR_SITE_HERE.path
 ```
 
