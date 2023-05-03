@@ -181,9 +181,6 @@ AmbientCapabilities=
 
 SocketBindAllow=
 SocketBindDeny=any
-
-[Install]
-WantedBy=multi-user.target
 ```
 
 ## systemd .path template unit
