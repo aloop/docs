@@ -19,7 +19,7 @@ This is was created for Ubuntu Server, other distros may have different director
 
 ## Packages
 
-```sh
+```bash
 sudo apt install webhook
 ```
 
@@ -27,7 +27,7 @@ sudo apt install webhook
 
 Edit the default webhook.service by using the command `sudo systemctl edit webhook`, with the following contents:
 
-```ini
+```ini {data-title="sudo systemctl edit webhook"}
 [Unit]
 ConditionPathExists=
 ConditionPathExists=/etc/webhooks/hooks.json
@@ -82,7 +82,7 @@ To generate a random uuid, you can use `uuidgen --random`
 
 Upon successfully triggering this webhook, it will `touch` the file `YOUR_SITE_HERE` in the `/var/lib/webhooks/` directory, which in turn triggers the systemd path file we setup later in this document, which then runs the systemd service that executes the build script.
 
-```json
+```json {data-title="/etc/webhooks/hooks.json"}
 [
   {
     "id": "YOUR_RANDOM_UUID_HERE",
@@ -124,13 +124,11 @@ Upon successfully triggering this webhook, it will `touch` the file `YOUR_SITE_H
 
 ## External webhooks access
 
-Outside of the scope of this document, a simple reverse proxy will suffice.
+Outside of the scope of this document, a simple reverse proxy should suffice.
 
 ## Static site build systemd service
 
-Create a file at `/etc/systemd/system/static-site-build@.service`, with the following contents:
-
-```ini
+```ini {data-title="/etc/systemd/system/static-site-build@.service"}
 [Unit]
 Description=Build %I
 AssertPathExists=/var/www/%I/
@@ -186,9 +184,9 @@ SocketBindDeny=any
 
 ## systemd .path template unit
 
-To trigger a build when a webhook modifies a file, we'll need to make a .path template unit. Create the file `/etc/systemd/system/static-site-build@.path`, with the contents:
+To trigger a build when a webhook modifies a file, we'll need to make a .path template unit.
 
-```ini
+```ini {data-title="/etc/systemd/system/static-site-build@.path"}
 [Install]
 WantedBy=multi-user.target
 
@@ -203,7 +201,7 @@ After creating the systemd files above, make sure to run `sudo systemctl daemon-
 Assuming that a git repo that has a `build.sh` script for building a site resides at `/var/www/YOUR_SITE_HERE/`,
 and that you have configured a webhook which executes `touch /var/lib/webhooks/YOUR_SITE_HERE`, you can simply execute the following:
 
-```sh
+```bash
 sudo systemctl enable --now static-site-build@YOUR_SITE_HERE.path
 ```
 
