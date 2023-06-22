@@ -5,23 +5,28 @@
   grid-template-areas:
     "header"
     "code";
+  background-color: var(--code-bg);
+  border-radius: rem(5);
 }
 
-// Code Block Title
-.highlight[data-title]::before {
+
+.highlight::before {
   position: relative;
   z-index: 2; // Prevents drop shadow from showing up over background
-  content: attr(data-title);
+  content: "# code";
   grid-area: header;
   align-self: center;
   padding: rem(10);
   padding-right: rem(60); // TODO: magic number
   border-top-left-radius: rem(5);
   border-top-right-radius: rem(5);
-  border-bottom: 1px solid var(--code-border-color);
   font-weight: bold;
   font-size: 0.95em;
   background-color: var(--code-bg);
+}
+// Code Block Title
+.highlight[data-title]::before {
+  content: attr(data-title);
 }
 
 .highlight .c-Copy {
@@ -31,19 +36,10 @@
 .chroma {
   grid-area: code;
 
-  background-color: var(--code-bg);
+  border-top: 1px solid var(--code-border-color);
   font-family: var(--font-monospace);
   font-size: em(14);
   padding: calc(var(--space) / 2);
-  border-radius: rem(5);
   overflow: auto;
   box-shadow: var(--content-box-shadow);
-
-  .highlight.has-copy-button > & {
-    border-top-right-radius: 0;
-  }
-
-  .highlight[data-title] > & {
-    border-top-left-radius: 0;
-  }
 }

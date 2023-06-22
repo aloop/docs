@@ -11,7 +11,8 @@
   --headings-color: var(--content-headings-color);
 }
 
-.c-Content p > code {
+.c-Content p > code,
+.c-Content code.code-inline {
   background-color: var(--code-bg);
   color: var(--code-color);
   border-radius: rem(5);
