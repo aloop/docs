@@ -44,7 +44,7 @@
   --content-title-color: var(--color);
   --content-headings-color: hsl(220, 23%, 25%);
   --code-bg: hsl(220, 23%, 90%);
-  --code-color: #fff;
+  --code-color: inherit;
   --code-border-color: #484b61;
   --breadcrumb-color: var(--link-color);
   --breadcrumb-color-active: var(--link-color-active);
@@ -77,6 +77,7 @@
     --last-updated-color: rgba(255, 255, 255, 0.6);
     --tag-color: #000;
     --code-bg: #282a36;
+    --code-color: #fff;
   }
 }
 
