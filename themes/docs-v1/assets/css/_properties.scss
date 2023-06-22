@@ -45,6 +45,7 @@ html {
   --content-headings-color: var(--code-bg);
   --code-bg: #282a36;
   --code-color: #fff;
+  --code-border-color: #484b61;
   --breadcrumb-color: var(--link-color);
   --breadcrumb-color-active: var(--link-color-active);
   --breadcrumb-separator: "»";
@@ -53,7 +54,7 @@ html {
   --tag-bg: var(--link-color);
   --tag-color-active: var(--tag-color);
   --tag-bg-active: var(--link-color-active);
-  --copy-button-bg: transparent;
+  --copy-button-bg: var(--content-bg);
   --copy-button-bg-active: var(--code-bg);
   --copy-button-border-color: var(--code-bg);
   --copy-button-color: var(--color);

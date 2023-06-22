@@ -2,9 +2,35 @@
   line-height: var(--code-line-height);
   margin-bottom: var(--p-margin);
   display: grid;
+  grid-template-areas:
+    "header"
+    "code";
+}
+
+// Code Block Title
+.highlight[data-title]::before {
+  position: relative;
+  z-index: 2; // Prevents drop shadow from showing up over background
+  content: attr(data-title);
+  grid-area: header;
+  align-self: center;
+  padding: rem(10);
+  padding-right: rem(60); // TODO: magic number
+  border-top-left-radius: rem(5);
+  border-top-right-radius: rem(5);
+  border-bottom: 1px solid var(--code-border-color);
+  font-weight: bold;
+  font-size: 0.95em;
+  background-color: var(--code-bg);
+}
+
+.highlight .c-Copy {
+  grid-area: header;
 }
 
 .chroma {
+  grid-area: code;
+
   background-color: var(--code-bg);
   font-family: var(--font-monospace);
   font-size: em(14);
@@ -15,5 +41,9 @@
 
   .highlight.has-copy-button > & {
     border-top-right-radius: 0;
+  }
+
+  .highlight[data-title] > & {
+    border-top-left-radius: 0;
   }
 }
