@@ -6,6 +6,7 @@ tags:
   - linux
   - systemd
   - static site
+  - cli
   - builds
   - development
   - deployment

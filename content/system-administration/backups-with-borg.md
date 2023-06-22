@@ -5,8 +5,9 @@ date: "2021-04-22"
 tags:
   - linux
   - systemd
-  - backup
+  - backups
   - administration
+  - cli
 ---
 
 ## Installation
