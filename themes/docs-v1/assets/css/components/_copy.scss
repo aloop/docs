@@ -2,6 +2,8 @@
   position: relative;
   z-index: 2; // Prevents drop shadow from showing up over background
 
+  align-self: center;
+  margin: rem(5);
   margin-left: auto;
   padding: rem(5) rem(10);
 
@@ -14,9 +16,7 @@
   color: var(--copy-button-color);
 
   border: rem(2) solid var(--copy-button-border-color);
-  border-bottom: 0;
-  border-top-left-radius: rem(5);
-  border-top-right-radius: rem(5);
+  border-radius: rem(5);
 
   transition: all 100ms ease-in-out;
 

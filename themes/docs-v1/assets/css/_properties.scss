@@ -45,7 +45,7 @@
   --content-headings-color: hsl(220, 23%, 25%);
   --code-bg: hsl(220, 23%, 90%);
   --code-color: inherit;
-  --code-border-color: #484b61;
+  --code-border-color: var(--link-color-active);
   --breadcrumb-color: var(--link-color);
   --breadcrumb-color-active: var(--link-color-active);
   --breadcrumb-separator: "»";
@@ -55,7 +55,7 @@
   --tag-color-active: var(--tag-color);
   --tag-bg-active: var(--link-color-active);
   --copy-button-bg: var(--content-bg);
-  --copy-button-bg-active: var(--code-bg);
+  --copy-button-bg-active: var(--content-bg);
   --copy-button-border-color: var(--code-bg);
   --copy-button-color: var(--color);
   --copy-button-color-active: var(--color);
