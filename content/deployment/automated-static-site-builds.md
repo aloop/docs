@@ -37,8 +37,10 @@ Restart=on-abnormal
 
 DynamicUser=true
 
+LoadCredential=hooks.json:/etc/webhooks/hooks.json
+
 ExecStart=
-ExecStart=/usr/bin/webhook -nopanic -ip 127.0.0.1 -port 9000 -verbose -hooks /etc/webhooks/hooks.json
+ExecStart=/usr/bin/webhook -nopanic -ip 127.0.0.1 -port 9000 -verbose -hooks %d/hooks.json
 
 PrivateTmp=true
 PrivateDevices=true
