@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/aloop/docs#readme",
   "dependencies": {
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.6",
-    "postcss-cli": "^9.1.0"
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0"
   }
 }
