@@ -8,7 +8,7 @@
   --content-font-size: #{rem(16)};
   --line-height: 1.6;
   --code-line-height: 1.4;
-  --headings-weight: 300;
+  --headings-weight: bold;
   --h1-size: 1.6em;
   --h2-size: 1.4em;
   --h3-size: 1.1em;
@@ -41,8 +41,7 @@
   --content-bg: #fff;
   --content-box-shadow: 0 0 2px rgba(22, 22, 22, 0.05),
     0 3px 5px rgba(22, 22, 22, 0.025);
-  --content-title-color: var(--color);
-  --content-headings-color: hsl(220, 23%, 25%);
+  --content-headings-color: hsl(220, 23%, 20%);
   --code-bg: hsl(220, 23%, 90%);
   --code-color: inherit;
   --code-border-color: var(--link-color-active);

@@ -41,6 +41,5 @@
 }
 
 .c-Content-title {
-  color: var(--content-title-color);
   font-size: unquote("max(var(--h1-size), min(calc(0.5em + 4vw), 3rem))");
 }
