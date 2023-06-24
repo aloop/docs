@@ -4,6 +4,3 @@
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: same-origin
-
-/service-worker.js
-  Cache-Control: no-cache, must-revalidate
