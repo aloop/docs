@@ -4,6 +4,7 @@
 @import "vars";
 @import "properties";
 
+/* purgecss start ignore */
 @import "generic/reset";
 
 @import "elements/root";
@@ -15,6 +16,7 @@
 @import "elements/images";
 @import "elements/forms";
 @import "elements/code";
+/* purgecss end ignore */
 
 @import "components/skip-to-content";
 @import "components/nav";
@@ -31,7 +33,9 @@
 @import "utilities/hidden";
 @import "utilities/visually-hidden";
 
+/* purgecss start ignore */
 @import "vendor/syntax-light";
 @import "vendor/syntax";
 
 @import "overrides/highlight";
+/* purgecss end ignore */
