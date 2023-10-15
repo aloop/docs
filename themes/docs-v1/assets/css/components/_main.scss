@@ -1,8 +1,11 @@
+@use "../functions" as fns;
+@use "../vars";
+
 .c-Main {
   grid-area: main;
   margin: var(--main-margin);
 
-  @media screen and (max-width: ($nav-media-query-width - rem(1))) {
+  @media screen and (max-width: (vars.$nav-media-query-width - fns.rem(1))) {
     transition: transform var(--nav-transition-props);
 
     .c-NavContainer.is-open ~ &,

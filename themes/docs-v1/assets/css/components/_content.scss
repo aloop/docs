@@ -1,3 +1,5 @@
+@use "../functions" as fns;
+
 .c-Content {
   min-width: 0;
   width: 100%;
@@ -5,7 +7,7 @@
   background: var(--content-bg);
   box-shadow: var(--content-box-shadow);
   padding: var(--content-padding);
-  border-radius: rem(4);
+  border-radius: fns.rem(4);
   font-size: var(--content-font-size);
 
   --headings-color: var(--content-headings-color);
@@ -15,10 +17,10 @@
 .c-Content code.code-inline {
   background-color: var(--code-bg);
   color: var(--code-color);
-  border-radius: rem(5);
-  padding: em(4) em(4) em(2) em(4);
-  margin-right: em(1);
-  font-size: em(14);
+  border-radius: fns.rem(5);
+  padding: fns.em(4) fns.em(4) fns.em(2) fns.em(4);
+  margin-right: fns.em(1);
+  font-size: fns.em(14);
 }
 
 .c-Content :where(h1, h2, h3, h4, h5, h6)::before {
@@ -31,7 +33,7 @@
 .c-Content :where(h1, h2, h3, h4, h5, h6):target {
   &,
   & a {
-    text-decoration: underline solid rem(2) var(--link-color);
+    text-decoration: underline solid fns.rem(2) var(--link-color);
     text-underline-position: under;
   }
 }

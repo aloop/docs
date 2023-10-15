@@ -1,41 +1,37 @@
-@import "functions/em";
-@import "functions/rem";
-
-@import "vars";
-@import "properties";
-
 /* purgecss start ignore */
-@import "generic/reset";
+@forward "./generic/reset";
 
-@import "elements/root";
-@import "elements/body";
-@import "elements/headings";
-@import "elements/links";
-@import "elements/paragraphs";
-@import "elements/lists";
-@import "elements/images";
-@import "elements/forms";
-@import "elements/code";
+@forward "./properties";
+
+@forward "./elements/root";
+@forward "./elements/body";
+@forward "./elements/headings";
+@forward "./elements/links";
+@forward "./elements/paragraphs";
+@forward "./elements/lists";
+@forward "./elements/images";
+@forward "./elements/forms";
+@forward "./elements/code";
 /* purgecss end ignore */
 
-@import "components/skip-to-content";
-@import "components/nav";
-@import "components/nav-container";
-@import "components/main";
-@import "components/content";
-@import "components/last-updated";
-@import "components/breadcrumbs";
-@import "components/tags";
-@import "components/heading-anchor";
-@import "components/copy";
-@import "components/toc";
+@forward "./components/skip-to-content";
+@forward "./components/nav";
+@forward "./components/nav-container";
+@forward "./components/main";
+@forward "./components/content";
+@forward "./components/last-updated";
+@forward "./components/breadcrumbs";
+@forward "./components/tags";
+@forward "./components/heading-anchor";
+@forward "./components/copy";
+@forward "./components/toc";
 
-@import "utilities/hidden";
-@import "utilities/visually-hidden";
+@forward "./utilities/hidden";
+@forward "./utilities/visually-hidden";
 
 /* purgecss start ignore */
-@import "vendor/syntax-light";
-@import "vendor/syntax";
+// @forward "./vendor/syntax-light";
+// @forward "./vendor/syntax";
 
-@import "overrides/highlight";
+@forward "./overrides/highlight";
 /* purgecss end ignore */

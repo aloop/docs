@@ -1,0 +1,9 @@
+@use "sass:math";
+
+@function strip-unit($size) {
+  @if type-of($size) != "number" {
+    @error "strip-unit given type '#{type-of($size)}' with value '#{$size}' instead of number";
+  }
+
+  @return math.div($size, $size * 0 + 1);
+}

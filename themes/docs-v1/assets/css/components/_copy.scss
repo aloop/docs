@@ -1,11 +1,13 @@
+@use "../functions" as fns;
+
 .c-Copy {
   position: relative;
   z-index: 2; // Prevents drop shadow from showing up over background
 
   align-self: center;
-  margin: rem(5);
+  margin: fns.rem(5);
   margin-left: auto;
-  padding: rem(5) rem(10);
+  padding: fns.rem(5) fns.rem(10);
 
   font-family: var(--font);
   font-size: 0.8em;
@@ -15,8 +17,8 @@
   background-color: var(--copy-button-bg);
   color: var(--copy-button-color);
 
-  border: rem(2) solid var(--copy-button-border-color);
-  border-radius: rem(5);
+  border: fns.rem(2) solid var(--copy-button-border-color);
+  border-radius: fns.rem(5);
 
   transition: all 100ms ease-in-out;
 

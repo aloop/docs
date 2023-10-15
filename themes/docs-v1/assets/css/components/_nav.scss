@@ -1,3 +1,6 @@
+@use "../functions" as fns;
+@use "../vars";
+
 .c-Nav {
   background-color: var(--nav-bg);
   position: relative;
@@ -5,11 +8,11 @@
   width: var(--nav-width);
   max-width: var(--nav-width);
   padding-right: var(--space);
-  font-size: rem(16);
+  font-size: fns.rem(16);
   line-height: 1.2;
   outline: none;
 
-  @media screen and (max-width: ($nav-media-query-width - rem(1))) {
+  @media screen and (max-width: (vars.$nav-media-query-width - fns.rem(1))) {
     position: absolute;
     top: var(--nav-icon-full-size);
     right: 100%;
@@ -36,7 +39,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
-  font-size: rem(14);
+  font-size: fns.rem(14);
   margin-bottom: calc(var(--space) / 2);
   cursor: pointer;
 }

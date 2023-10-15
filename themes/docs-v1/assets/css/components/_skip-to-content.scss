@@ -1,3 +1,5 @@
+@use "../functions" as fns;
+
 .c-SkipToContent {
   position: fixed;
   top: 0;
@@ -8,8 +10,8 @@
   transition: transform 100ms ease-in-out;
   background: var(--skip-to-content-bg);
   color: var(--skip-to-content-color);
-  padding: rem(6) rem(10);
-  border-radius: 0 0 rem(4) rem(4);
+  padding: fns.rem(6) fns.rem(10);
+  border-radius: 0 0 fns.rem(4) fns.rem(4);
 
   &:active,
   &:focus,

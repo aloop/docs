@@ -1,7 +1,9 @@
+@use "../functions" as fns;
+
 .c-Breadcrumbs {
   list-style: none;
   margin-bottom: calc(var(--space) / 2);
-  font-size: rem(14);
+  font-size: fns.rem(14);
 }
 
 .c-Breadcrumbs-item {
@@ -20,7 +22,7 @@
 
 .c-Breadcrumbs-link {
   display: inline-block;
-  padding: em(2.5) em(5);
+  padding: fns.em(2.5) fns.em(5);
   color: var(--breadcrumb-color);
   text-decoration: none;
 

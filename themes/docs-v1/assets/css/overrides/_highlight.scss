@@ -1,3 +1,5 @@
+@use "../functions" as fns;
+
 .highlight {
   line-height: var(--code-line-height);
   margin-bottom: var(--p-margin);
@@ -6,9 +8,8 @@
     "header"
     "code";
   background-color: var(--code-bg);
-  border-radius: rem(5);
+  border-radius: fns.rem(5);
 }
-
 
 .highlight::before {
   position: relative;
@@ -16,10 +17,10 @@
   content: "# code";
   grid-area: header;
   align-self: center;
-  padding: rem(10);
-  padding-right: rem(60); // TODO: magic number
-  border-top-left-radius: rem(5);
-  border-top-right-radius: rem(5);
+  padding: fns.rem(10);
+  padding-right: fns.rem(60); // TODO: magic number
+  border-top-left-radius: fns.rem(5);
+  border-top-right-radius: fns.rem(5);
   font-weight: bold;
   font-size: 0.95em;
   background-color: var(--code-bg);

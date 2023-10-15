@@ -1,11 +1,12 @@
-@function em($pixels, $base-font-size-px: 16) {
+@use "sass:math";
+
+@use "../vars";
+@use "strip-unit" as *;
+
+@function em($pixels, $base-font-size: vars.$base-font-size) {
   @if not(unitless($pixels)) {
-    @error "rem: $pixels should be a unitless number, '#{$pixels}' given.";
+    @error "em: $pixels should be a unitless number, '#{$pixels}' given.";
   }
 
-  @if not(unitless($base-font-size-px)) {
-    @error "rem: $base-font-size-px should be a unitless number, '#{$base-font-size-px}' given.";
-  }
-
-  @return ($pixels / $base-font-size-px) + 0em;
+  @return math.div($pixels, strip-unit($base-font-size)) + 0em;
 }

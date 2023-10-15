@@ -1,1 +1,4 @@
-$nav-media-query-width: rem(800);
+@use "sass:math";
+
+$base-font-size: 16;
+$nav-media-query-width: math.div(800, $base-font-size) * 1rem;
