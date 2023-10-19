@@ -15,5 +15,6 @@ const purgecssConfig = {
 };
 
 module.exports = {
-  plugins: [require("autoprefixer"), purgecss(purgecssConfig), cssnano()],
+  // plugins: [require("autoprefixer"), purgecss(purgecssConfig), cssnano()],
+  plugins: [require("autoprefixer"), cssnano()],
 };

@@ -13,8 +13,8 @@
   --headings-color: var(--content-headings-color);
 }
 
-.c-Content p > code,
-.c-Content code.code-inline {
+/* purgecss start ignore */
+.c-Content p > code {
   background-color: var(--code-bg);
   color: var(--code-color);
   border-radius: fns.rem(5);
@@ -22,6 +22,7 @@
   margin-right: fns.em(1);
   font-size: fns.em(14);
 }
+/* purgecss end ignore */
 
 .c-Content :where(h1, h2, h3, h4, h5, h6)::before {
   content: "> ";
