@@ -1,25 +1,22 @@
 {
-  "name": "docs",
+  "name": "aloop-docs",
+  "type": "module",
   "version": "1.0.0",
-  "description": "",
-  "author": "Anthony Loop",
-  "license": "SEE LICENSE IN LICENSE",
-  "private": true,
+  "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aloop/docs.git"
-  },
-  "bugs": {
-    "url": "https://github.com/aloop/docs/issues"
-  },
-  "homepage": "https://github.com/aloop/docs#readme",
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
+    "astro": "^3.3.2",
     "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0"
+    "cssnano": "^6.0.1",
+    "rehype-rewrite": "^4.0.0",
+    "remark-code-titles": "^0.1.2",
+    "sass": "^1.69.4"
   }
 }

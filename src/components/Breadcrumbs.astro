@@ -1,0 +1,27 @@
+---
+import getPath from "../util/path";
+
+const path = getPath(Astro.request.url);
+
+const { segments } = Astro.props;
+---
+
+<nav>
+  <ol class="c-Breadcrumbs">
+    <li class="c-Breadcrumbs-item">
+      <a href="/" class="c-Breadcrumbs-link">Home</a>
+    </li>
+    {
+      (segments || []).map(({ title, slug }) => (
+        <li class="c-Breadcrumbs-item">
+          <a
+            href={`/${slug}/`}
+            class={`c-Breadcrumbs-link ${slug === path ? "is-current" : ""}`}
+          >
+            {title}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

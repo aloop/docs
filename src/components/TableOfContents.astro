@@ -1,0 +1,40 @@
+---
+import TableOfContentsItem from "./TableOfContentsItem.astro";
+
+const { headings } = Astro.props;
+
+const formatHeading = ({ text, slug }) => ({
+  title: text,
+  anchor: `#${slug}`,
+  children: [],
+});
+
+const buildToc = (headings) => {
+  const toc = [];
+  const hierarchy = new Map();
+
+  for (const heading of headings) {
+    const formattedHeading = formatHeading(heading);
+    hierarchy.set(heading.depth, formattedHeading);
+
+    if (heading.depth === 2) {
+      toc.push(formattedHeading);
+    } else {
+      hierarchy.get(heading.depth - 1).children.push(formattedHeading);
+    }
+  }
+
+  return toc;
+};
+
+const tocItems = buildToc(headings);
+---
+
+<details class="c-TOC">
+  <summary class="c-TOC-title">Table of Contents</summary>
+  <nav class="c-TOC-body">
+    <ul>
+      {tocItems.map((item) => <TableOfContentsItem item={item} />)}
+    </ul>
+  </nav>
+</details>

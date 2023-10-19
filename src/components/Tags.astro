@@ -1,0 +1,20 @@
+---
+const { tags = [] } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <div class="c-Tags-container">
+      <div class="c-Tags-container-title">Tags</div>
+      <ul class="c-Tags c-Tags--small">
+        {tags.sort().map((tag) => (
+          <li class="c-Tag">
+            <a href={`/tags/${tag}/`} class="c-Tag-link">
+              {tag}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+import getPath from "../util/path";
+
+const documentation = await getCollection("documentation");
+
+interface Category {
+  title: string;
+  pages: any[];
+}
+
+interface Categories {
+  [propName: string]: Category;
+}
+
+const categories = documentation
+  .filter(({ slug }) => !slug.includes("/"))
+  .reduce<Categories>((map, page) => {
+    map[page.slug] = {
+      title: page.data.title,
+      pages: [],
+    };
+
+    return map;
+  }, {});
+
+documentation
+  .filter(({ slug }) => slug.includes("/"))
+  .reduce((categories, page) => {
+    const category = page.slug.split("/")[0];
+
+    categories[category].pages.push(page);
+
+    return categories;
+  }, categories);
+
+const currentPath = getPath(Astro.request.url);
+---
+
+<div class="c-NavContainer" id="nav-container-9cc6478e">
+  <button
+    title="Toggle Navigation"
+    class="c-NavContainer-toggle"
+    id="nav-toggle-b9b1766c"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-nav-1e445c2f"
+  >
+    <span class="c-NavContainer-icon" aria-hidden="true"></span>
+    <span class="u-visuallyHidden">Toggle Navigation</span>
+  </button>
+  <nav
+    class="c-Nav"
+    id="site-nav-1e445c2f"
+    aria-label="Main Navigation"
+    tabindex="-1"
+  >
+    <ul class="c-Nav-list">
+      <li class="c-Nav-list-item">
+        <a
+          href="/"
+          class={`c-Nav-list-link ${currentPath === "" ? " is-current" : ""}`}
+          >Home</a
+        >
+      </li>
+      {
+        Object.values(categories)
+          .sort()
+          .map(({ title, pages }) => (
+            <li class="c-Nav-section">
+              <details open>
+                <summary class="c-Nav-section-title">{title}</summary>
+                <ul class="c-Nav-list">
+                  {pages.sort().map(({ data: { title }, slug }) => (
+                    <li class="c-Nav-list-item">
+                      <a
+                        href={`/${slug}/`}
+                        class={`c-Nav-list-link ${
+                          currentPath === slug ? " is-current" : ""
+                        }`}
+                      >
+                        {title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))
+      }
+    </ul>
+  </nav>
+</div>
+
+<script>
+  // Setup handlers for opening and closing navigation
+  const navContainer = document.getElementById("nav-container-9cc6478e");
+  const toggle = document.getElementById("nav-toggle-b9b1766c");
+
+  if (navContainer !== null && toggle !== null) {
+    const openClassName = "is-open";
+
+    const hasClass = () => navContainer.classList.contains(openClassName);
+    const removeClass = () => navContainer.classList.remove(openClassName);
+
+    const closeNav = () => {
+      if (hasClass()) {
+        removeClass();
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    };
+
+    const handleEscape = ({ key }) => {
+      if (key === "Escape") {
+        closeNav();
+      }
+    };
+
+    const closeOnClick = ({ target }) => {
+      if (hasClass() && !navContainer.contains(target)) {
+        closeNav();
+      }
+    };
+
+    const resizeOpts = { once: true };
+
+    toggle.addEventListener("click", async () => {
+      navContainer.classList.toggle(openClassName);
+      toggle.setAttribute("aria-expanded", `${hasClass()}`);
+
+      if (navContainer.classList.contains(openClassName)) {
+        window.addEventListener("resize", closeNav, resizeOpts);
+      }
+    });
+
+    document.addEventListener("keyup", handleEscape);
+    document.addEventListener("click", closeOnClick);
+  }
+</script>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import getPath from "../util/path";
+
+import BaseLayout from "./BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const { frontmatter } = Astro.props;
+
+const path = getPath(Astro.request.url);
+
+const documentation = await getCollection("documentation");
+
+const pages = documentation.filter(
+  ({ slug }) => slug.includes("/") && slug.split("/")[0] === path
+);
+
+const pathSegments = [
+  {
+    title: frontmatter.title,
+    slug: path,
+  },
+];
+---
+
+<BaseLayout title={`Category: ${frontmatter.title}`}>
+  <aside>
+    <Breadcrumbs segments={pathSegments} />
+  </aside>
+  <header>
+    <h1 class="c-Content-title">{frontmatter.title}</h1>
+  </header>
+  <slot />
+  <ul>
+    {
+      pages.sort().map(({ slug, data }) => (
+        <li>
+          <a href={`/${slug}/`}>{data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

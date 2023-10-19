@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import getPath from "../../util/path";
+
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const docs = (await getCollection("documentation")).filter((doc) =>
+    Array.isArray(doc?.data?.tags)
+  );
+  const tags = Array.from(new Set(docs.flatMap((doc) => doc.data.tags)));
+
+  return tags.map((tag) => ({
+    params: {
+      tag,
+    },
+    props: {
+      tag,
+    },
+  }));
+}
+
+const { tag } = Astro.props;
+
+const docsWithTag = (await getCollection("documentation"))
+  .filter(
+    (doc) => Array.isArray(doc?.data?.tags) && doc.data.tags.includes(tag)
+  )
+  .sort();
+
+const path = getPath(Astro.request.url);
+
+const pathSegments = [
+  {
+    title: "Tags",
+    slug: "tags",
+  },
+  {
+    title: tag,
+    slug: path,
+  },
+];
+---
+
+<BaseLayout title={`Tag: ${tag}`}>
+  <Breadcrumbs segments={pathSegments} />
+  <h1 class="c-Content-title">{tag}</h1>
+  <ul>
+    {
+      docsWithTag.map(({ slug, data: { title } }) => (
+        <li>
+          <a href={`/${slug}/`}>{title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

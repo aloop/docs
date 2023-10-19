@@ -1,0 +1,40 @@
+---
+import "../../styles/main.scss";
+import Navigation from "../components/Navigation.astro";
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#4d33cc" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ? title + " - Documentation" : "Documentation"}</title>
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body tabindex="-1">
+    <script>
+      document.documentElement.classList.remove("no-js");
+      document.documentElement.classList.add("js");
+    </script>
+    <a
+      href="#content-434728a4"
+      class="c-SkipToContent u-visuallyHidden is-focusable">Skip to content</a
+    >
+    <Navigation />
+    <main class="c-Main">
+      <article id="content-434728a4" class="c-Content">
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>

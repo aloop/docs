@@ -1,0 +1,16 @@
+---
+const { item } = Astro.props;
+---
+
+<li>
+  <a href={item.anchor}>{item.title}</a>
+  {
+    item.children.length > 0 && (
+      <ul>
+        {item.children.map((childItem) => (
+          <Astro.self item={childItem} />
+        ))}
+      </ul>
+    )
+  }
+</li>

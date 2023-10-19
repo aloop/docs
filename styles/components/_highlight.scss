@@ -1,0 +1,29 @@
+@use "../functions" as fns;
+
+.c-Highlight {
+  line-height: var(--code-line-height);
+  margin-bottom: var(--p-margin);
+  display: grid;
+  grid-template-areas:
+    "title button"
+    "code code";
+  grid-template-columns: 1fr min-content;
+  column-gap: fns.rem(10);
+  align-items: center;
+  background-color: var(--code-bg);
+  border-radius: fns.rem(5);
+}
+
+.c-Highlight-title {
+  position: relative;
+  z-index: 2; // Prevents drop shadow from showing up over background
+  grid-area: title;
+  font-weight: bold;
+  font-size: 0.95em;
+  padding: fns.rem(10);
+}
+
+.c-Highlight .c-Copy {
+  grid-area: button;
+  justify-self: end;
+}

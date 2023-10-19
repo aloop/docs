@@ -1,0 +1,103 @@
+---
+import { getEntry } from "astro:content";
+import getPath from "../util/path";
+
+import BaseLayout from "./BaseLayout.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+import Tags from "../components/Tags.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const { frontmatter, headings } = Astro.props;
+
+const path = getPath(Astro.request.url);
+const category = path.slice(0, path.indexOf("/"));
+const entries = [
+  getEntry("documentation", category),
+  getEntry("documentation", path),
+];
+
+const pathSegments = (await Promise.all(entries)).map((entry) => {
+  return {
+    title: entry.data.title,
+    slug: entry.slug,
+  };
+});
+---
+
+<BaseLayout title={frontmatter.title}>
+  <aside>
+    <Breadcrumbs segments={pathSegments} />
+    <Tags tags={frontmatter.tags} />
+  </aside>
+  <header>
+    <small class="c-LastUpdated"
+      >Date Published: <time datetime="">{frontmatter.date}</time></small
+    >
+    <h1 class="c-Content-title">{frontmatter.title}</h1>
+  </header>
+  <aside>
+    <TableOfContents headings={headings} />
+  </aside>
+  <slot />
+</BaseLayout>
+
+<script>
+  // Create and enable elements to easily copy code blocks
+
+  // Make sure we have the Clipboard API available
+  if ("clipboard" in navigator) {
+    const codeBlocks = document.querySelectorAll("[data-code-block]");
+
+    // Create our template element to clone for each code block
+    const copyButtonTemplate = document.createElement("button");
+    copyButtonTemplate.classList.add("c-Copy");
+    copyButtonTemplate.setAttribute("title", "Copy code to clipboard");
+    copyButtonTemplate.innerText = "copy";
+
+    for (const codeBlock of codeBlocks) {
+      const copyButton = copyButtonTemplate.cloneNode(
+        true
+      ) as HTMLButtonElement;
+
+      const timeoutFn = () => {
+        copyButton.disabled = false;
+        copyButton.innerText = "copy";
+      };
+
+      copyButton.addEventListener("click", async (ev) => {
+        // This selector is a bit fragile
+        const code = codeBlock.querySelector("code");
+
+        if (code) {
+          try {
+            // Copy the code to the clipboard
+            await navigator.clipboard.writeText(code.innerText);
+
+            // Temporarily disable the copy button and indicate that the copy was successful
+            copyButton.disabled = true;
+            copyButton.innerText = "copied!";
+
+            // Revert text and re-enable button after a few seconds
+            setTimeout(timeoutFn, 1500);
+          } catch (e) {
+            console.error("Failed to copy code block.");
+          }
+        }
+      });
+
+      const originalTitleEl = codeBlock.previousElementSibling as HTMLElement;
+      const codeBlockTitle = codeBlock.querySelector<HTMLElement>(
+        "[data-code-block-title]"
+      );
+
+      if (originalTitleEl.classList.contains("remark-code-title")) {
+        codeBlockTitle.innerText = originalTitleEl.innerText;
+        originalTitleEl.remove();
+      }
+
+      // Insert the copy button in such a way that it is the first child
+      codeBlock.insertBefore(copyButton, codeBlockTitle.nextElementSibling);
+      codeBlock.classList.add("has-copy-button");
+    }
+  }
+</script>

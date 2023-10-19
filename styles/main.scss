@@ -1,0 +1,35 @@
+/* purgecss start ignore */
+@forward "./generic/reset";
+
+@forward "./properties";
+
+@forward "./elements/root";
+@forward "./elements/body";
+@forward "./elements/headings";
+@forward "./elements/links";
+@forward "./elements/paragraphs";
+@forward "./elements/lists";
+@forward "./elements/images";
+@forward "./elements/forms";
+@forward "./elements/code";
+/* purgecss end ignore */
+
+@forward "./components/skip-to-content";
+@forward "./components/nav";
+@forward "./components/nav-container";
+@forward "./components/main";
+@forward "./components/content";
+@forward "./components/last-updated";
+@forward "./components/breadcrumbs";
+@forward "./components/tags";
+@forward "./components/heading-anchor";
+@forward "./components/highlight";
+@forward "./components/copy";
+@forward "./components/toc";
+
+@forward "./utilities/hidden";
+@forward "./utilities/visually-hidden";
+
+/* purgecss start ignore */
+@forward "./overrides/astro-code";
+/* purgecss end ignore */
