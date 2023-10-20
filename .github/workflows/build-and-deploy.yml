@@ -62,11 +62,10 @@ jobs:
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region: us-west-1
 
       - name: Upload to S3
         run: aws --endpoint-url https://cdn.aloop.cloud/ s3 sync ${{ env.BUILD_PATH }}/dist/ s3://docs.aloop.dev/ --delete --acl public-read
