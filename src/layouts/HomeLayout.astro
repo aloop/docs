@@ -6,6 +6,6 @@ const { frontmatter } = Astro.props;
 <BaseLayout title={frontmatter.title}>
   <header>
     <h1 class="c-Content-Title">{frontmatter.title}</h1>
-    <slot />
   </header>
+  <slot />
 </BaseLayout>
