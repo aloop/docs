@@ -1,6 +1,9 @@
 ---
 import { getEntry } from "astro:content";
 import getPath from "../util/path";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 import BaseLayout from "./BaseLayout.astro";
 import TableOfContents from "../components/TableOfContents.astro";
@@ -8,6 +11,14 @@ import Tags from "../components/Tags.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 
 const { frontmatter, headings } = Astro.props;
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const lastModified = dayjs(frontmatter.lastModified).tz("America/Los_Angeles");
+
+const datetime = lastModified.format();
+const displayedDate = lastModified.format("ddd, MMM DD, YYYY");
 
 const path = getPath(Astro.request.url);
 const category = path.slice(0, path.indexOf("/"));
@@ -31,7 +42,7 @@ const pathSegments = (await Promise.all(entries)).map((entry) => {
   </aside>
   <header>
     <small class="c-LastUpdated"
-      >Date Published: <time datetime="">{frontmatter.date}</time></small
+      >Last Modified: <time datetime={datetime}>{displayedDate}</time></small
     >
     <h1 class="c-Content-title">{frontmatter.title}</h1>
   </header>

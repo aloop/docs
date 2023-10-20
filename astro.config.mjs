@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import remarkCodeTitles from "remark-code-titles";
+import { remarkModifiedTime } from "./plugins/remark-modified-time.mjs";
 
 // The following theme is from https://github.com/catppuccin/vscode/tree/compiled
 import catppuccinTheme from "./catppuccin-highlight.json";
@@ -12,7 +13,8 @@ export default defineConfig({
     shikiConfig: {
       theme: catppuccinTheme,
     },
-    remarkPlugins: [remarkCodeTitles],
+    remarkPlugins: [remarkCodeTitles, remarkModifiedTime],
+
     rehypePlugins: [
       [
         "rehype-rewrite",
