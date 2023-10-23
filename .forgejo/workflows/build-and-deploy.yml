@@ -5,15 +5,6 @@ on:
   push:
     branches: ["main"]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 env:
   BUILD_PATH: "."
 
@@ -25,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: "0"
 
       - name: Detect package manager
         id: detect-package-manager
@@ -63,10 +54,14 @@ jobs:
             --base "/"
         working-directory: ${{ env.BUILD_PATH }}
 
+      - name: Install awscli
+        run: |
+          apt-get update && apt-get install -y awscli
+
       - name: Configure AWS Credentials
         run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && \
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && \
           aws configure set default.region us-west-1
 
       - name: Upload to S3
