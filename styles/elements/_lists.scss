@@ -4,6 +4,10 @@ ul {
   list-style-type: square;
 }
 
+ul ul {
+  margin-bottom: 0;
+}
+
 li {
   margin-bottom: var(--li-margin);
 }

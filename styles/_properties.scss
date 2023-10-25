@@ -30,56 +30,38 @@
     var(--nav-icon-size) + (var(--nav-icon-spacing) * 2)
   );
   // Color
-  --bg-color: hsl(220, 23%, 95%);
-  --color: hsl(218, 13%, 11%);
-  --link-color: hsl(250, 100%, 65%);
-  --link-color-active: hsl(250, 90%, 45%);
+  --bg-color: hsl(276, 35%, 14%);
+  --color: #fff;
+  --link-color: hsl(46, 78%, 48%);
+  --link-color-active: hsl(46, 78%, 80%);
+  --headings-color: #fff;
   --skip-to-content-bg: var(--link-color);
   --skip-to-content-color: var(--bg-color);
   --nav-bg: var(--bg-color);
   --nav-link-color: var(--link-color);
   --nav-link-color-active: var(--link-color-active);
   --nav-icon-color: var(--color);
-  --content-bg: #fff;
-  --content-box-shadow: 0 0 2px rgba(22, 22, 22, 0.05),
-    0 3px 5px rgba(22, 22, 22, 0.025);
-  --content-headings-color: hsl(220, 23%, 20%);
-  --code-bg: hsl(220, 23%, 90%);
-  --code-color: inherit;
+  --content-bg: transparent;
+  --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 5px rgba(0, 0, 0, 0.1);
+  --content-headings-color: hsl(46, 78%, 80%);
+  --code-bg: hsl(276, 25%, 18%);
+  --code-color: #fff;
   --code-border-color: var(--link-color-active);
   --breadcrumb-color: var(--link-color);
-  --breadcrumb-color-active: var(--link-color-active);
+  --breadcrumb-color-active: hsl(46, 78%, 80%);
   --breadcrumb-separator: "»";
-  --last-updated-color: rgba(0, 0, 0, 0.65);
-  --tag-color: #fff;
+  --last-updated-color: rgba(255, 255, 255, 0.6);
+  --tag-color: #000;
   --tag-bg: var(--link-color);
   --tag-color-active: var(--tag-color);
   --tag-bg-active: var(--link-color-active);
-  --copy-button-bg: var(--content-bg);
-  --copy-button-bg-active: var(--content-bg);
+  --copy-button-bg: var(--bg-color);
+  --copy-button-bg-active: var(--bg-color);
   --copy-button-border-color: var(--code-bg);
   --copy-button-color: var(--color);
   --copy-button-color-active: var(--color);
   // Animations
   --nav-transition-props: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-@media screen and (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: hsl(231, 15%, 8%);
-    --color: #fff;
-    --link-color: hsl(250, 100%, 80%);
-    --link-color-active: hsl(250, 100%, 70%);
-    --breadcrumb-color-active: hsl(250, 100%, 73%);
-    --content-bg: hsl(231, 15%, 14%);
-    --content-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2),
-      0 3px 5px rgba(0, 0, 0, 0.1);
-    --content-headings-color: inherit;
-    --last-updated-color: rgba(255, 255, 255, 0.6);
-    --tag-color: #000;
-    --code-bg: #282a36;
-    --code-color: #fff;
-  }
 }
 
 @media screen and (min-width: fns.rem(480)) {

@@ -4,12 +4,8 @@
   min-width: 0;
   width: 100%;
   max-width: var(--content-max-width, 100%);
-  background: var(--content-bg);
-  box-shadow: var(--content-box-shadow);
   padding: var(--content-padding);
-  border-radius: fns.rem(4);
   font-size: var(--content-font-size);
-
   --headings-color: var(--content-headings-color);
 }
 
@@ -44,5 +40,6 @@
 }
 
 .c-Content-title {
+  --headings-color: var(--content-headings-color);
   font-size: unquote("max(var(--h1-size), min(calc(0.5em + 4vw), 3rem))");
 }
