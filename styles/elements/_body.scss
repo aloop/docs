@@ -11,7 +11,7 @@ body {
 
   display: grid;
   grid-template-areas: "nav main";
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto max(100%, 1fr);
   grid-template-columns: auto minmax(0, 1fr);
 
   @supports (min-height: 100dvh) {

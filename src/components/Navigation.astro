@@ -38,60 +38,61 @@ const currentPath = getPath(Astro.request.url);
 ---
 
 <div class="c-NavContainer" id="nav-container-9cc6478e">
-  <button
-    title="Toggle Navigation"
-    class="c-NavContainer-toggle"
-    id="nav-toggle-b9b1766c"
-    type="button"
-    aria-expanded="false"
-    aria-controls="site-nav-1e445c2f"
-  >
-    <span class="c-NavContainer-icon" aria-hidden="true"></span>
-    <span class="u-visuallyHidden">Toggle Navigation</span>
-  </button>
-  <nav
-    class="c-Nav"
-    id="site-nav-1e445c2f"
-    aria-label="Main Navigation"
-    tabindex="-1"
-  >
-    <ul class="c-Nav-list">
-      <li class="c-Nav-list-item">
-        <a
-          href="/"
-          class={`c-Nav-list-link ${currentPath === "" ? " is-current" : ""}`}
-          >Home</a
-        >
-      </li>
-      {
-        Object.values(categories)
-          .sort()
-          .map(({ title, pages }) => (
-            <li class="c-Nav-section">
-              <details open>
-                <summary class="c-Nav-section-title">{title}</summary>
-                <ul class="c-Nav-list">
-                  {pages.sort().map(({ data: { title }, slug }) => (
-                    <li class="c-Nav-list-item">
-                      <a
-                        href={`/${slug}/`}
-                        class={`c-Nav-list-link ${
-                          currentPath === slug ? " is-current" : ""
-                        }`}
-                      >
-                        {title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </li>
-          ))
-      }
-    </ul>
-  </nav>
+  <div class="c-Nav-wrapper">
+    <button
+      title="Toggle Navigation"
+      class="c-Nav-toggle"
+      id="nav-toggle-b9b1766c"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav-1e445c2f"
+    >
+      <span class="c-Nav-icon" aria-hidden="true"></span>
+      <span class="u-visuallyHidden">Toggle Navigation</span>
+    </button>
+    <nav
+      class="c-Nav"
+      id="site-nav-1e445c2f"
+      aria-label="Main Navigation"
+      tabindex="-1"
+    >
+      <ul class="c-Nav-list">
+        <li class="c-Nav-list-item">
+          <a
+            href="/"
+            class={`c-Nav-list-link ${currentPath === "" ? " is-current" : ""}`}
+            >Home</a
+          >
+        </li>
+        {
+          Object.values(categories)
+            .sort()
+            .map(({ title, pages }) => (
+              <li class="c-Nav-section">
+                <details open>
+                  <summary class="c-Nav-section-title">{title}</summary>
+                  <ul class="c-Nav-list">
+                    {pages.sort().map(({ data: { title }, slug }) => (
+                      <li class="c-Nav-list-item">
+                        <a
+                          href={`/${slug}/`}
+                          class={`c-Nav-list-link ${
+                            currentPath === slug ? " is-current" : ""
+                          }`}
+                        >
+                          {title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+  </div>
 </div>
-
 <script>
   // Setup handlers for opening and closing navigation
   const navContainer = document.getElementById("nav-container-9cc6478e");

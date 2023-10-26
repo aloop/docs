@@ -3,7 +3,7 @@
 
 .c-Main {
   grid-area: main;
-  margin: var(--main-margin);
+  min-height: 100%;
 
   @media screen and (max-width: (vars.$nav-media-query-width - fns.rem(1))) {
     transition: transform var(--nav-transition-props);
