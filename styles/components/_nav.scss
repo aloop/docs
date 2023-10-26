@@ -38,7 +38,7 @@
     100dvh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0)
   );
   position: sticky;
-  inset: 0;
+  inset: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
 }
 
 .c-Nav-section {
