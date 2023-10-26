@@ -18,7 +18,10 @@
   --space: #{fns.rem(20)};
   --li-margin: #{fns.rem(4)};
   --p-margin: var(--space);
-  --body-padding: calc(var(--space) * 2) 0 0;
+  --body-padding: calc(var(--space) * 2 + env(safe-area-inset-top))
+    env(safe-area-inset-right)
+    calc(var(--space) * 2 + env(safe-area-inset-bottom))
+    env(safe-area-inset-left);
   --body-min-width: #{fns.rem(280)};
   --main-margin: 0 calc(var(--space) / 2) calc(var(--space) * 2) 0;
   --content-max-width: #{fns.rem(1200)};
