@@ -1,7 +1,10 @@
 body {
   min-height: 100vh;
   min-width: var(--body-min-width);
-  padding: var(--body-padding);
+  padding: calc(env(safe-area-inset-top) + var(--body-padding))
+    calc(env(safe-area-inset-right) + var(--body-padding))
+    calc(env(safe-area-inset-bottom) + var(--body-padding))
+    calc(env(safe-area-inset-left) + var(--body-padding));
   margin: auto;
   color: var(--color);
   font-family: var(--font);
