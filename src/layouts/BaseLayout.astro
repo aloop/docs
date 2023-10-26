@@ -20,6 +20,11 @@ const { title } = Astro.props;
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#261730" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title ? title + " - Documentation" : "Documentation"}</title>
     <link rel="manifest" href="/manifest.json" />
