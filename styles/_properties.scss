@@ -24,6 +24,7 @@
   --main-margin: 0 calc(var(--space) / 2) calc(var(--space) * 2) 0;
   --content-max-width: #{fns.rem(1200)};
   --content-padding: calc(var(--space) * 0.75);
+  --content-padding-top: var(--content-padding);
   --nav-width: #{fns.rem(250)};
   --nav-icon-size: #{fns.rem(20)};
   --nav-icon-spacing: #{fns.rem(10)};
@@ -76,6 +77,7 @@
 
 @media screen and (min-width: fns.rem(680)) {
   :root {
+    --content-padding-top: calc(var(--space) * 1.5);
     --content-padding: calc(var(--space) * 1.5) calc(var(--space) * 1.5)
       calc(var(--space) * 1.5 - var(--space)) calc(var(--space) * 1.5);
   }
