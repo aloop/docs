@@ -10,6 +10,10 @@ body {
   line-height: var(--line-height);
   overflow-x: hidden;
 
+  @supports (overflow-x: clip) {
+    overflow-x: clip;
+  }
+
   display: grid;
   grid-template-areas: "nav main";
   grid-template-rows: auto max(100%, 1fr);
