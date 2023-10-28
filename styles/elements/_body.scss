@@ -1,6 +1,7 @@
 body {
   min-height: 100vh;
   min-width: var(--body-min-width);
+  max-width: 100%;
   padding: var(--body-padding);
   margin: auto;
   color: var(--color);
