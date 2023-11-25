@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@amloop/aml-css": "^4.1.1",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "astro": "^3.6.0",
     "autoprefixer": "^10.4.16",

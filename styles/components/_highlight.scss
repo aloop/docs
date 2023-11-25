@@ -1,8 +1,7 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-Highlight {
   line-height: var(--code-line-height);
-  margin-bottom: var(--p-margin);
   display: grid;
   grid-template-areas:
     "title button"

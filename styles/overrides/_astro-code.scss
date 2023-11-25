@@ -1,13 +1,13 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .astro-code {
   grid-area: code;
 
   border-top: 1px solid var(--code-border-color);
-  font-family: var(--font-monospace);
+  font-family: var(--aml-font-mono);
   font-size: em(14);
-  padding: calc(var(--space) / 2);
+  padding: calc(var(--code-padding) / 2);
   overflow: auto;
-  box-shadow: var(--content-box-shadow);
+  box-shadow: var(--shadow-primary);
   background-color: transparent !important;
 }

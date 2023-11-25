@@ -1,31 +1,31 @@
-@use "../functions" as fns;
-@use "../vars";
+@use "../abstract/functions" as fns;
+@use "../abstract/variables";
 
 .c-Nav {
   position: relative;
   width: var(--nav-width);
   max-width: var(--nav-width);
   max-height: 100%;
-  padding-right: var(--space);
+  padding-right: fns.rem(20);
   font-size: fns.rem(16);
   line-height: 1.2;
   outline: none;
-  overflow-y: auto;
+  overflow: clip auto;
   -webkit-overflow-scrolling: touch;
 
-  @media screen and (max-width: (vars.$nav-media-query-width - fns.rem(1))) {
+  @media screen and (width < variables.$nav-media-query-width) {
+    --nav-offset: calc(
+      (var(--nav-spacing) * 2) + var(--nav-icon-size) +
+        (var(--nav-icon-spacing) * 2)
+    );
+
     position: absolute;
-    top: calc(
-      var(--space) + var(--nav-icon-full-size) + var(--nav-icon-spacing) * 2
-    );
+    top: var(--nav-offset);
     right: 100%;
-    max-height: calc(
-      100% - var(--space) - var(--nav-icon-full-size) - var(--nav-icon-spacing) *
-        2
-    );
+    max-height: calc(100% - var(--nav-offset));
     opacity: 0;
     visibility: hidden;
-    transition: all var(--nav-transition-props);
+    transition: all var(--nav-transition);
 
     .c-NavContainer.is-open &,
     .no-js .c-NavContainer:focus-within & {
@@ -37,17 +37,17 @@
 }
 
 .c-Nav-wrapper {
+  position: sticky;
   height: 100%;
-  padding-top: var(--content-padding-top);
   max-height: calc(
     100dvh - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0)
   );
-  position: sticky;
   inset: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0) 0;
+  padding-top: var(--top-padding);
 }
 
 .c-Nav-section {
-  margin: calc(var(--space) * 1.5) 0;
+  margin: calc(var(--nav-spacing) * 1.5) 0;
 }
 
 .c-Nav-section-title {
@@ -55,12 +55,14 @@
   letter-spacing: 1px;
   font-weight: bold;
   font-size: fns.rem(14);
-  margin-bottom: calc(var(--space) / 2);
+  margin-bottom: calc(var(--nav-spacing) / 2);
   cursor: pointer;
 }
 
 .c-Nav-list {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 
   .c-Nav-list {
     padding-left: 0;
@@ -69,7 +71,7 @@
 }
 
 .c-Nav-list-item {
-  margin-bottom: calc(var(--space) / 3);
+  margin-bottom: calc(var(--nav-spacing) / 3);
 
   &:last-of-type {
     margin-bottom: 0;
@@ -81,10 +83,11 @@
   text-decoration: none;
   display: block;
   line-height: 1.4;
+  text-wrap: balance;
 
   &.is-current,
   &:hover,
-  &:focus {
+  &:focus-within {
     color: var(--nav-link-color-active);
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -99,22 +102,17 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: var(--nav-icon-spacing);
+  padding-block: var(--nav-icon-spacing);
   z-index: 10;
-  width: var(--nav-icon-full-size);
-  height: var(--nav-icon-full-size);
-  transition: transform var(--nav-transition-props);
-
-  .is-open &,
-  .no-js .c-NavContainer:focus-within & {
-    transform: translateX(calc(var(--space) - var(--nav-icon-spacing)));
-  }
+  width: var(--nav-icon-size);
+  height: calc(var(--nav-icon-size) + (var(--nav-icon-spacing) * 2));
+  transition: transform var(--nav-transition);
 
   .no-js .c-NavContainer:focus-within & {
     pointer-events: none;
   }
 
-  @media screen and (min-width: vars.$nav-media-query-width) {
+  @media screen and (width >= variables.$nav-media-query-width) {
     display: none;
   }
 }
@@ -131,8 +129,8 @@
     height: fns.rem(2);
     background-color: var(--nav-icon-color);
     border-radius: var(--nav-icon-size);
-    transition: transform var(--nav-transition-props),
-      background-color var(--nav-transition-props);
+    transition: transform var(--nav-transition),
+      background-color var(--nav-transition);
   }
 
   &::before {

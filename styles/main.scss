@@ -1,35 +1,54 @@
-/* purgecss start ignore */
-@forward "./generic/reset";
+// 1 -- SASS variables/mixins/functions
 
-@forward "./properties";
+@forward "abstract/variables";
 
-@forward "./elements/root";
-@forward "./elements/body";
-@forward "./elements/headings";
-@forward "./elements/links";
-@forward "./elements/paragraphs";
-@forward "./elements/lists";
-@forward "./elements/images";
-@forward "./elements/forms";
-@forward "./elements/code";
-/* purgecss end ignore */
+// 2 -- CSS Properties
 
-@forward "./components/skip-to-content";
-@forward "./components/nav";
-@forward "./components/nav-container";
-@forward "./components/main";
-@forward "./components/content";
-@forward "./components/last-updated";
+@forward "abstract/properties";
+
+// 3 -- Base (resets, default element styles, etc.)
+
+@forward "@amloop/aml-css/lib/base";
+
+@forward "./base/root";
+@forward "./base/body";
+@forward "./base/headings";
+@forward "./base/lists";
+@forward "./base/code";
+@forward "./base/pseudo";
+
+// 4 -- Layouts (header, footer, forms, etc.)
+
+@forward "./layout/main";
+@forward "./layout/nav-container";
+@forward "./layout/nav";
+@forward "./layout/site-wrapper";
+
+// 5 -- Pages (page-specific styles)
+
+// 6 -- Objects
+
+@forward "@amloop/aml-css/lib/objects";
+
+@forward "./objects/container";
+
+// 7 -- Components (reusable styles)
+
 @forward "./components/breadcrumbs";
-@forward "./components/tags";
-@forward "./components/heading-anchor";
-@forward "./components/highlight";
+@forward "./components/content";
 @forward "./components/copy";
+@forward "./components/highlight";
+@forward "./components/last-updated";
+@forward "./components/skip-to-content";
+@forward "./components/tags";
 @forward "./components/toc";
 
-@forward "./utilities/hidden";
-@forward "./utilities/visually-hidden";
+// 8 -- Utilities (utility classes)
 
-/* purgecss start ignore */
+@forward "@amloop/aml-css/lib/utilities";
+
+// 9 -- Vendor (3rd-party css)
+
+// 10 -- Overrides (overrides, mainly intended for 3rd-party css)
+
 @forward "./overrides/astro-code";
-/* purgecss end ignore */

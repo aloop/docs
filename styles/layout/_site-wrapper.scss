@@ -1,0 +1,9 @@
+@use "../abstract/functions" as fns;
+
+.SiteWrapper {
+  display: grid;
+  grid-template-areas: "nav main";
+  grid-template-rows: auto max(100%, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: fns.rem(20);
+}

@@ -35,6 +35,10 @@ documentation
   }, categories);
 
 const currentPath = getPath(Astro.request.url);
+
+const ariaCurrent = {
+  "aria-current": "page",
+};
 ---
 
 <div class="c-NavContainer" id="nav-container-9cc6478e">
@@ -53,7 +57,7 @@ const currentPath = getPath(Astro.request.url);
     <nav
       class="c-Nav"
       id="site-nav-1e445c2f"
-      aria-label="Main Navigation"
+      aria-label="Primary"
       tabindex="-1"
     >
       <ul class="c-Nav-list">
@@ -61,7 +65,7 @@ const currentPath = getPath(Astro.request.url);
           <a
             href="/"
             class={`c-Nav-list-link ${currentPath === "" ? " is-current" : ""}`}
-            >Home</a
+            {...currentPath === "" ? ariaCurrent : {}}>Home</a
           >
         </li>
         {
@@ -79,6 +83,7 @@ const currentPath = getPath(Astro.request.url);
                           class={`c-Nav-list-link ${
                             currentPath === slug ? " is-current" : ""
                           }`}
+                          {...(slug === currentPath ? ariaCurrent : {})}
                         >
                           {title}
                         </a>

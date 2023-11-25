@@ -1,0 +1,9 @@
+@use "../abstract/functions" as fns;
+
+.o-Container {
+  min-width: var(--aml-min-site-width);
+}
+
+.o-Container--fluid {
+  --padding: #{fns.fluid(10, 40)};
+}

@@ -1,4 +1,4 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-Breadcrumbs {
   --_gap: #{fns.rem(5)};
@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   gap: calc(var(--_gap) / 2) var(--_gap);
   list-style: none;
-  margin-bottom: calc(var(--space) / 2);
+  margin-bottom: calc(var(--aml-size) / 2);
   font-size: fns.rem(14);
 }
 

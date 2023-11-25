@@ -1,13 +1,16 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-Copy {
   position: relative;
   z-index: 2; // Prevents drop shadow from showing up over background
 
+  display: inline-flex;
+  align-items: baseline;
   align-self: center;
   margin: fns.rem(5);
   margin-left: auto;
   padding: fns.rem(5) fns.rem(10);
+  height: fns.rem(32);
 
   font-family: var(--font);
   font-size: 0.8em;

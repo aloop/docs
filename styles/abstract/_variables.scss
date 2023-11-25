@@ -1,0 +1,27 @@
+@use "sass:map";
+@use "sass:math";
+
+@forward "@amloop/aml-css/lib/abstract/variables" with (
+  $max-site-width: 1000
+);
+
+@use "@amloop/aml-css/lib/abstract/variables";
+
+/* Example with overrides:
+@forward "@amloop/aml-css/lib/abstract/variables" with (
+  // Customize variables here
+  $base-font-size: 16,
+  $min-site-width: 320,
+  $max-site-width: 1920,
+  $namespace: "",
+  $default-media-type: all,
+  $breakpoints: map.merge(
+    $breakpoints,
+    (
+      xxl: tools.rem(1600),
+    )
+  )
+);
+*/
+
+$nav-media-query-width: math.div(800, variables.$base-font-size) * 1rem;

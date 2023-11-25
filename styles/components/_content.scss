@@ -1,45 +1,47 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-Content {
-  min-width: 0;
-  width: 100%;
-  max-width: var(--content-max-width, 100%);
-  padding: var(--content-padding);
   font-size: var(--content-font-size);
   --headings-color: var(--content-headings-color);
-}
 
-/* purgecss start ignore */
-.c-Content p > code {
-  background-color: var(--code-bg);
-  color: var(--code-color);
-  border-radius: fns.rem(5);
-  padding: fns.em(4) fns.em(4) fns.em(2) fns.em(4);
-  margin-right: fns.em(1);
-  font-size: fns.em(14);
-}
-/* purgecss end ignore */
+  padding-bottom: var(--aml-size-xl);
 
-.c-Content :where(h1, h2, h3, h4, h5, h6)::before {
-  content: "> ";
-  color: var(--link-color);
-  font-weight: bold;
-  display: none;
-}
-
-.c-Content :where(h1, h2, h3, h4, h5, h6):target {
-  &,
-  & a {
-    text-decoration: underline solid fns.rem(2) var(--link-color);
-    text-underline-position: under;
+  > * + * {
+    margin-top: fns.em(20);
   }
-}
 
-.c-Content :where(h1, h2, h3, h4, h5, h6):target::before {
-  display: inline;
-}
+  &-title {
+    font-size: fns.fluid(24, 48);
+  }
 
-.c-Content-title {
-  --headings-color: var(--content-headings-color);
-  font-size: unquote("max(var(--h1-size), min(calc(0.5em + 4vw), 3rem))");
+  & p > code {
+    background-color: var(--clr-secondary-400);
+    color: var(--code-inline-color);
+    border-radius: fns.rem(5);
+    padding: fns.em(4) fns.em(4) fns.em(2) fns.em(4);
+    margin-right: fns.em(1);
+    font-size: fns.em(14);
+    font-weight: 700;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6) {
+    &::before {
+      content: "> ";
+      color: var(--aml-link-color);
+      font-weight: bold;
+      display: none;
+    }
+
+    &:target {
+      &,
+      & a {
+        text-decoration: underline solid fns.rem(2) var(--aml-link-color);
+        text-underline-position: under;
+      }
+    }
+
+    &:target::before {
+      display: inline;
+    }
+  }
 }

@@ -1,0 +1,13 @@
+ul {
+  padding-left: var(--list-spacing);
+  margin-bottom: var(--list-spacing);
+  list-style-type: square;
+}
+
+ul ul {
+  margin-bottom: 0;
+}
+
+li {
+  margin-bottom: var(--list-item-spacing);
+}

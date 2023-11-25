@@ -11,10 +11,10 @@ const purgecssConfig = {
       extensions: ["astro"],
     },
   ],
+  variables: true,
   safelist: [/^(is-|has-|will-|js-)/],
 };
 
 module.exports = {
-  // plugins: [require("autoprefixer"), purgecss(purgecssConfig), cssnano()],
-  plugins: [require("autoprefixer"), cssnano()],
+  plugins: [require("autoprefixer"), purgecss(purgecssConfig), cssnano()],
 };

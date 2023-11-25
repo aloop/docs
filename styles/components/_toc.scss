@@ -1,13 +1,13 @@
 .c-TOC {
-  margin-bottom: var(--space);
+  margin-bottom: var(--aml-size);
 }
 
 .c-TOC-title {
   font-weight: bold;
-  margin-bottom: calc(var(--space) / 2);
+  margin-bottom: calc(var(--aml-size) / 2);
   cursor: pointer;
 }
 
 .c-TOC-body {
-  padding-left: calc(var(--space) / 2);
+  padding-left: calc(var(--aml-size) / 2);
 }

@@ -39,11 +39,15 @@ const { title } = Astro.props;
       href="#content-434728a4"
       class="c-SkipToContent u-visuallyHidden is-focusable">Skip to content</a
     >
-    <Navigation />
-    <main class="c-Main">
-      <article id="content-434728a4" class="c-Content">
-        <slot />
-      </article>
-    </main>
+    <div class="o-Container o-Container--fluid">
+      <div class="SiteWrapper">
+        <Navigation />
+        <main class="c-Main">
+          <article id="content-434728a4" class="c-Content">
+            <slot />
+          </article>
+        </main>
+      </div>
+    </div>
   </body>
 </html>

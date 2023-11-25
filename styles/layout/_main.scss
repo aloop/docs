@@ -1,12 +1,13 @@
-@use "../functions" as fns;
-@use "../vars";
+@use "../abstract/functions" as fns;
+@use "../abstract/variables";
 
 .c-Main {
   grid-area: main;
   min-height: 100%;
+  padding-top: var(--top-padding);
 
-  @media screen and (max-width: (vars.$nav-media-query-width - fns.rem(1))) {
-    transition: transform var(--nav-transition-props);
+  @media screen and (max-width: (variables.$nav-media-query-width - fns.rem(1))) {
+    transition: transform var(--nav-transition);
 
     .c-NavContainer.is-open ~ &,
     .no-js .c-NavContainer:focus-within ~ & {

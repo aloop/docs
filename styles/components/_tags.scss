@@ -1,8 +1,8 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-Tags-container {
   align-items: center;
-  margin-bottom: var(--space);
+  margin-bottom: var(--aml-size);
 
   > .c-Tags {
     margin-bottom: 0;
@@ -35,16 +35,21 @@
   border-radius: 2.5px;
   background-color: var(--tag-bg);
   color: var(--tag-color);
-  box-shadow: var(--content-box-shadow);
+  box-shadow: var(--shadow-primary);
   text-align: center;
-  --link-color: var(--tag-color);
+
+  a[href] {
+    color: var(--tag-color);
+  }
   --link-color-active: var(--tag-color-active);
 
   &:hover,
-  &:focus,
   &:focus-within {
     background-color: var(--tag-bg-active);
-    color: var(--tag-color-active);
+
+    a[href] {
+      color: var(--tag-color-active);
+    }
   }
 }
 

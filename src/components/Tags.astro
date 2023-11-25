@@ -4,7 +4,7 @@ const { tags = [] } = Astro.props;
 
 {
   tags.length > 0 && (
-    <div class="c-Tags-container">
+    <nav class="c-Tags-container" aria-label="Related Tags">
       <div class="c-Tags-container-title">Tags</div>
       <ul class="c-Tags c-Tags--small">
         {tags.sort().map((tag) => (
@@ -15,6 +15,6 @@ const { tags = [] } = Astro.props;
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   )
 }

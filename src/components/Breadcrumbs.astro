@@ -4,9 +4,13 @@ import getPath from "../util/path";
 const path = getPath(Astro.request.url);
 
 const { segments } = Astro.props;
+
+const ariaCurrent = {
+  "aria-current": "page",
+};
 ---
 
-<nav>
+<nav aria-label="Breadcrumb">
   <ol class="c-Breadcrumbs">
     <li class="c-Breadcrumbs-item">
       <a href="/" class="c-Breadcrumbs-link">Home</a>
@@ -17,6 +21,7 @@ const { segments } = Astro.props;
           <a
             href={`/${slug}/`}
             class={`c-Breadcrumbs-link ${slug === path ? "is-current" : ""}`}
+            {...(slug === path ? ariaCurrent : {})}
           >
             {title}
           </a>

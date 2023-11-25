@@ -1,4 +1,4 @@
-@use "../functions" as fns;
+@use "../abstract/functions" as fns;
 
 .c-SkipToContent {
   position: fixed;
@@ -7,7 +7,6 @@
   margin: 0 auto;
   text-align: center;
   transform: translate(-50%, -100%);
-  transition: transform 100ms ease-in-out;
   background: var(--skip-to-content-bg);
   color: var(--skip-to-content-color);
   padding: fns.rem(6) fns.rem(10);

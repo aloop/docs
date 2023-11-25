@@ -1,5 +1,4 @@
-@use "../functions" as fns;
-@use "../vars";
+@use "../abstract/functions" as fns;
 
 .c-NavContainer {
   position: relative;

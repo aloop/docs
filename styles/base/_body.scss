@@ -1,0 +1,8 @@
+body {
+  overflow-x: clip;
+  min-height: 100dvh;
+  width: 100dvw;
+  position: relative;
+  display: grid;
+  padding: var(--body-padding);
+}
