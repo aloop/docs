@@ -13,11 +13,11 @@
   "dependencies": {
     "@amloop/aml-css": "^4.1.1",
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "astro": "^3.6.0",
+    "astro": "^4.0.2",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.1",
     "dayjs": "^1.11.10",
-    "rehype-rewrite": "^4.0.0",
+    "rehype-rewrite": "^4.0.2",
     "remark-code-titles": "^0.1.2",
     "sass": "^1.69.4"
   }
