@@ -22,13 +22,13 @@
 
   // -- Colors
 
-  --clr-primary-400: hsl(46, 78%, 48%);
-  --clr-primary-300: hsl(46, 78%, 80%);
-  --clr-secondary-400: hsl(276, 35%, 75%);
-  --clr-secondary-700: hsl(276, 25%, 18%);
-  --clr-secondary-900: hsl(276, 35%, 14%);
+  --clr-primary-400: hsl(267, 83%, 80%);
+  --clr-primary-300: hsl(267, 83%, 90%);
+  --clr-secondary-400: hsl(228deg, 39%, 80%);
+  --clr-secondary-700: hsl(228deg, 39%, 24%);
+  --clr-secondary-900: hsl(228deg, 39%, 16%);
 
-  --aml-bg-color: var(--clr-secondary-900);
+  --aml-bg-color: hsl(232, 23%, 18%);
   --aml-text-color: #fff;
   --aml-link-color: var(--clr-primary-400);
   --aml-link-color-hover: var(--clr-primary-300);
@@ -63,62 +63,62 @@
   --list-spacing: var(--aml-size);
   --list-item-spacing: #{fns.rem(4)};
   --p-margin: var(--aml-size);
-  --body-padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  --body-padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   --body-min-width: #{fns.rem(280)};
   --top-padding: #{fns.fluid(
-      map.get(variables.$sizes, "default") * 0.75,
-      map.get(variables.$sizes, "default") * 1.5
-    )};
-  --nav-width: #{fns.rem(250)};
-  --nav-spacing: var(--aml-size);
-  --nav-icon-size: #{fns.rem(20)};
-  --nav-icon-spacing: #{fns.rem(10)};
-  --nav-icon-full-size: calc(
-    var(--nav-icon-size) + (var(--nav-icon-spacing) * 2)
-  );
-  --code-padding: var(--aml-size);
+ map.get(variables.$sizes, "default") * 0.75,
+  map.get(variables.$sizes, "default") * 1.5)
+}
 
-  // Color
-  --headings-color: var(--aml-text-color);
+;
+--nav-width: #{fns.rem(250)};
+--nav-spacing: var(--aml-size);
+--nav-icon-size: #{fns.rem(20)};
+--nav-icon-spacing: #{fns.rem(10)};
+--nav-icon-full-size: calc(var(--nav-icon-size) + (var(--nav-icon-spacing) * 2));
+--code-padding: var(--aml-size);
 
-  --skip-to-content-bg: var(--clr-primary-400);
-  --skip-to-content-color: var(--aml-bg-color);
+// Color
+--headings-color: var(--aml-text-color);
 
-  --nav-bg: var(--aml-bg-color);
-  --nav-link-color: var(--clr-primary-400);
-  --nav-link-color-active: var(--clr-primary-300);
-  --nav-icon-color: var(--aml-text-color);
+--skip-to-content-bg: var(--clr-primary-400);
+--skip-to-content-color: var(--aml-bg-color);
 
-  --content-bg: transparent;
-  --content-headings-color: var(--clr-primary-300);
+--nav-bg: var(--aml-bg-color);
+--nav-link-color: var(--clr-primary-400);
+--nav-link-color-active: var(--clr-primary-300);
+--nav-icon-color: var(--aml-text-color);
 
-  --code-bg: var(--clr-secondary-700);
-  --code-color: var(--aml-text-color);
-  --code-inline-color: var(--clr-secondary-900);
-  --code-border-color: var(--clr-primary-300);
+--content-bg: transparent;
+--content-headings-color: var(--clr-secondary-400);
 
-  --breadcrumb-color: var(--clr-primary-400);
-  --breadcrumb-color-active: var(--clr-primary-300);
-  --breadcrumb-separator: "❯";
+--code-bg: hsl(228deg, 20%, 65%);
+--code-color: var(--aml-text-color);
+--code-inline-color: var(--clr-secondary-900);
+--code-border-color: var(--clr-primary-300);
 
-  --tag-color: #000;
-  --tag-bg: var(--clr-primary-400);
-  --tag-color-active: var(--tag-color);
-  --tag-bg-active: var(--clr-primary-300);
+--breadcrumb-color: var(--clr-primary-400);
+--breadcrumb-color-active: var(--clr-primary-300);
+--breadcrumb-separator: "❯";
 
-  --copy-button-bg: var(--aml-bg-color);
-  --copy-button-bg-active: var(--aml-bg-color);
-  --copy-button-border-color: var(--code-bg);
-  --copy-button-color: var(--aml-text-color);
-  --copy-button-color-active: var(--aml-text-color);
+--tag-color: #000;
+--tag-bg: var(--clr-primary-400);
+--tag-color-active: var(--tag-color);
+--tag-bg-active: var(--clr-primary-300);
 
-  --highlight-color: var(--clr-secondary-400);
+--copy-button-bg: var(--aml-bg-color);
+--copy-button-bg-active: var(--aml-bg-color);
+--copy-button-border-color: var(--code-bg);
+--copy-button-color: var(--aml-text-color);
+--copy-button-color-active: var(--aml-text-color);
 
-  // Shadows
-  --shadow-primary: 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 5px rgba(0, 0, 0, 0.1);
+--highlight-color: var(--clr-secondary-400);
 
-  // Animations/Transitions
+// Shadows
+--shadow-primary: 0 0 2px rgba(0, 0, 0, 0.2),
+0 3px 5px rgba(0, 0, 0, 0.1);
 
-  --nav-transition: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+// Animations/Transitions
+
+--nav-transition: 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
