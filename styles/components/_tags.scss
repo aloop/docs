@@ -4,7 +4,7 @@
   align-items: center;
   margin-bottom: var(--aml-size);
 
-  > .c-Tags {
+  >.c-Tags {
     margin-bottom: 0;
   }
 }
@@ -29,6 +29,8 @@
 }
 
 .c-Tag {
+  --link-color-active: var(--tag-color-active);
+
   transition: background-color 100ms ease-out;
   margin-right: fns.em(5);
   margin-bottom: fns.em(5);
@@ -41,7 +43,6 @@
   a[href] {
     color: var(--tag-color);
   }
-  --link-color-active: var(--tag-color-active);
 
   &:hover,
   &:focus-within {

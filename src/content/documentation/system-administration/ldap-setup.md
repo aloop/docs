@@ -22,14 +22,14 @@ Before following any of the steps below, you should setup some things in your en
 
 Setting your UMask is important for the creation of some of the configuration files and secrets:
 
-```bash
+```bash frame="none"
 # User has read and write, Group has read, Other has no access
 umask 027
 ```
 
 ### Update Packages
 
-```bash
+```bash frame="none"
 sudo apt update && sudo apt upgrade
 ```
 
@@ -39,7 +39,7 @@ sudo apt update && sudo apt upgrade
 
 The following script will download a specified version of Lego and install it into `$PATH`.
 
-```bash:/usr/local/bin/update-lego
+```bash title="/usr/local/bin/update-lego"
 #!/usr/bin/env bash
 
 set -eEuo pipefail
@@ -93,7 +93,7 @@ cleanup
 
 Don't forget to make it executable!
 
-```bash
+```bash frame="none"
 sudo chmod +x /usr/local/bin/update-lego
 ```
 
@@ -112,13 +112,13 @@ This will assume we are obtaining our cert using DNS-01 on Cloudflare with a Clo
 
 Create the configuration directory structure:
 
-```bash
+```bash frame="none"
 sudo mkdir -p /etc/lego/secrets
 ```
 
 Create the `config.env` file, making sure to edit in your email and domain:
 
-```bash:/etc/lego/config.env
+```bash title="/etc/lego/config.env"
 LEGO_EMAIL="your@email.com"
 LEGO_DOMAIN="ldap.yourdomain.com"
 LEGO_RESOLVER="1.1.1.1"
@@ -126,13 +126,13 @@ LEGO_RESOLVER="1.1.1.1"
 
 Create a file with your cloudflare token:
 
-```bash:/etc/lego/secrets/cf_token
+```bash title="/etc/lego/secrets/cf_token"
 YOUR_CLOUDFLARE_TOKEN_HERE
 ```
 
 Create a systemd timer unit with `sudo systemctl edit --full --force lego.timer`, customizing the time if you want to:
 
-```ini:/etc/systemd/system/lego.timer
+```ini title="/etc/systemd/system/lego.timer"
 [Unit]
 Description=Timer for LEGO cert renewals
 
@@ -150,7 +150,7 @@ WantedBy=timers.target
 
 Create the systemd service unit with `sudo systemctl edit --full --force lego.service`:
 
-```ini:/etc/systemd/system/lego.service
+```ini title="/etc/systemd/system/lego.service"
 [Unit]
 Description=LLDAP TLS cert renewal using Lego
 After=network.target network-online.target
@@ -228,13 +228,13 @@ WantedBy=multi-user.target
 
 Starting the service manually should obtain the certificate:
 
-```bash
+```bash frame="none"
 sudo systemctl start lego.service
 ```
 
 Now you can enable the timer so that the cert is renewed when necessary:
 
-```bash
+```bash frame="none"
 sudo systemctl enable --now lego.timer
 ```
 
@@ -246,13 +246,13 @@ Other options are supported by LLDAP, such as MySQL and SQLite.
 
 ### Installation
 
-```bash
+```bash frame="none"
 sudo apt install postgresql
 ```
 
 ### Create user and database
 
-```bash
+```bash frame="none"
 sudo -u postgres createuser --pwprompt lldap
 sudo -u postgres createdb --owner="lldap" --encoding="UTF8"--lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" lldap_db
 ```
@@ -264,7 +264,7 @@ sudo -u postgres createdb --owner="lldap" --encoding="UTF8"--lc-collate="en_US.U
 This script will help install the requested LLDAP version from the project GitHub releases.
 The script can also update the LLDAP install for future releases (as long as the file structure doesn't change).
 
-```bash:/usr/local/bin/update-lldap
+```bash title="/usr/local/bin/update-lldap"
 #!/usr/bin/env bash
 
 set -eEuo pipefail
@@ -322,14 +322,14 @@ cleanup
 
 Make it executable:
 
-```bash
+```bash frame="none"
 sudo chmod +x /usr/local/bin/update-lldap
 ```
 
 Check [LLDAP on Github](https://github.com/lldap/lldap/releases) to determine the current release version
 and run the script with that version:
 
-```bash
+```bash frame="none"
 update-lldap 0.4.3
 ```
 
@@ -344,14 +344,14 @@ lldap 0.4.3
 
 First, let's create the directories we'll need:
 
-```bash
+```bash frame="none"
 sudo mkdir -p /etc/lldap/secrets
 ```
 
 I'll give an example of a minimal configuration file below, but if you want to have more details, check out the [example
 on the LLDAP github repo](https://github.com/lldap/lldap/blob/main/lldap_config.docker_template.toml).
 
-```toml:/etc/lldap/config.toml
+```toml title="/etc/lldap/config.toml"
 ## Tune the logging to be more verbose by setting this to be true.
 # verbose=false
 
@@ -390,7 +390,7 @@ database_url = "postgres://POSTGRES_USER_HERE:POSTGRES_PASSWORD_HERE@localhost:5
 
 ### Generating the JWT secret
 
-```bash
+```bash frame="none"
 LC_ALL=C tr -dc 'A-Za-z0-9!#%&'\''()*+,-./:;<=>?@[\]^_{|}~' </dev/urandom | head -c 32; echo '' | sudo tee /etc/lldap/secrets/jwt_secret
 ```
 
@@ -403,7 +403,7 @@ Add whatever password you like (as long as it's secure) to `/etc/lldap/secrets/a
 Begin creating the `lldap.service` file by running `sudo systemctl edit --full --force lldap.service`, then paste the contents below,
 making sure to edit the paths to the cert files.
 
-```ini:/etc/systemd/system/lldap.service
+```ini title="/etc/systemd/system/lldap.service"
 [Unit]
 Description=LLDAP
 Documentation=https://github.com/lldap/lldap
@@ -501,6 +501,6 @@ WantedBy=multi-user.target
 
 You should now have everything needed to start LLDAP:
 
-```bash
+```bash frame="none"
 sudo systemctl enable --now lldap.service
 ```

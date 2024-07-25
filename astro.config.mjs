@@ -1,37 +1,30 @@
 import { defineConfig } from "astro/config";
-import remarkCodeTitles from "remark-code-titles";
+import expressiveCode from "astro-expressive-code";
+
 import { remarkModifiedTime } from "./plugins/remark-modified-time.mjs";
-
-// The following theme is from https://github.com/catppuccin/vscode/tree/compiled
-import catppuccinTheme from "./catppuccin-highlight.json";
-
-const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
+import macchiato from "@catppuccin/vscode/themes/macchiato.json" with { type: "json" };
 
 // https://astro.build/config
 export default defineConfig({
   markdown: {
-    shikiConfig: {
-      theme: catppuccinTheme,
-    },
-    remarkPlugins: [remarkCodeTitles, remarkModifiedTime],
-
-    rehypePlugins: [
-      [
-        "rehype-rewrite",
-        {
-          rewrite: (node, index, parent) => {
-            if (
-              node.type === "raw" &&
-              node.value.startsWith('<pre class="astro-code')
-            ) {
-              node.value = `<figure class="c-Highlight" data-code-block><figcaption class="c-Highlight-title" data-code-block-title># code</figcaption>${node.value}</figure>`;
-            }
-
-            if (node.type === "element" && headings.includes(node.tagName)) {
-            }
-          },
-        },
-      ],
-    ],
+    remarkPlugins: [remarkModifiedTime],
   },
+  integrations: [
+    expressiveCode({
+      themes: [macchiato],
+      styleOverrides: {
+        borderRadius: "0px",
+        borderColor: "var(--code-border-color)",
+        borderWidth: "1px",
+        codeBackground: "var(--code-bg)",
+        codeFontFamily: "inherit",
+        frames: {
+          //editorTabBarBorderBottomColor: "var(--code-border-color)",
+          //terminalTitlebarBorderBottomColor: "var(--code-border-color)",
+          editorActiveTabIndicatorTopColor: "transparent",
+          terminalBackground: "var(--code-bg)",
+        },
+      },
+    }),
+  ],
 });

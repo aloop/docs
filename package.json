@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@amloop/aml-css": "^4.1.1",
+    "@catppuccin/vscode": "^3.15.0",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "astro": "^4.4.2",
+    "astro-expressive-code": "^0.35.3",
     "autoprefixer": "^10.4.17",
     "cssnano": "^7.0.1",
     "dayjs": "^1.11.10",
-    "rehype-rewrite": "^4.0.2",
-    "remark-code-titles": "^0.1.2",
     "sass": "^1.71.1"
   }
 }

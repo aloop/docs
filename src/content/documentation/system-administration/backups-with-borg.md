@@ -17,7 +17,7 @@ Most major Linux distributions have a package available, we'll assume Ubuntu Ser
 
 On both the the system(s) being backed up and the backup server(s), install the following package:
 
-```bash
+```bash frame="none"
 sudo apt update
 sudo apt install borgbackup
 ```
@@ -30,7 +30,7 @@ This file will be loaded by the systemd service and passed to the backup script 
 Make sure to replace the contents of `BACKUP_NAME`, `BACKUP_HOST`, and `BACKUP_PATH` with proper values, and optionally
 provide values for `BACKUP_USER` and `BACKUP_PORT`.
 
-```bash
+```bash frame="none"
 export BACKUP_NAME=somename
 export BACKUP_HOST=127.0.0.1
 export BACKUP_PATH=/backup/path/client
@@ -53,7 +53,7 @@ umask "$current_umask"
 
 Create an ssh keypair without a passphrase for the root account on your client(s):
 
-```bash
+```bash frame="none"
 sudo ssh-keygen -t ed25519 -f "/etc/borg/targets/${BACKUP_NAME}/id_${BACKUP_NAME}"
 ```
 
@@ -65,14 +65,14 @@ This can be skipped if you intend to use a service like [rsync.net](https://www.
 
 ### Create borg user
 
-```bash
+```bash frame="none"
 sudo useradd -m -U -s /bin/bash borg
 sudo passwd -l borg
 ```
 
 ### Create Backups Folder
 
-```bash
+```bash frame="none"
 current_umask="$(umask)"
 umask 027
 sudo mkdir /backup/path/client
@@ -86,7 +86,7 @@ umask "$current_umask"
 
 Copy the public key from the ssh keypair you generated earlier to the backup server:
 
-```bash:/home/borg/.ssh/authorized_keys
+```bash title="/home/borg/.ssh/authorized_keys"
 command="mkdir -p /backup/path/client && cd /backup/path/client && borg serve --restrict-to-path /backup/path/client",restrict ssh-ed25519 AAAAC3N[...] user@host
 ```
 
@@ -96,7 +96,7 @@ You will need one of these entries for each client you intend to give access, wi
 
 ### Initialize Backup
 
-```bash
+```bash frame="none"
 sudo borg init --encryption=repokey-blake2 borg@example.com:/backup/path/client
 ```
 
@@ -104,7 +104,7 @@ sudo borg init --encryption=repokey-blake2 borg@example.com:/backup/path/client
 
 The following script is adapted from the [Borg Quick Start](https://borgbackup.readthedocs.io/en/stable/quickstart.html) Documentation.
 
-```bash:/usr/local/bin/borg-backup
+```bash title="/usr/local/bin/borg-backup"
 #!/bin/sh
 
 ###
@@ -223,7 +223,7 @@ fi
 exit ${global_exit}
 ```
 
-```bash
+```bash frame="none"
 sudo chmod +x /usr/local/bin/borg-backup
 ```
 
@@ -231,7 +231,7 @@ sudo chmod +x /usr/local/bin/borg-backup
 
 `sudo systemctl edit --full --force borg-backup@.service`
 
-```ini:borg-backup@.service
+```ini title="borg-backup@.service"
 [Unit]
 Description=Borg Backup Service
 After=network.target network-online.target
@@ -281,7 +281,7 @@ CacheDirectoryMode=0750
 
 `sudo systemctl edit --full --force borg-backup@.timer`
 
-```ini:borg-backup@.timer
+```ini title="borg-backup@.timer"
 [Unit]
 Description=Borg Backup Timer
 
@@ -298,7 +298,7 @@ If you would like to change the frequency of backups, documentation for systemd 
 
 Following the creation of the two systemd units, test that the script works by running the service and checking for errors:
 
-```bash
+```bash frame="none"
 sudo systemctl start borg-backup@BACKUP_NAME.service
 sudo journalctl -xefu borg-backup@BACKUP_NAME.service
 ```

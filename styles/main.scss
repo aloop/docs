@@ -36,8 +36,6 @@
 
 @forward "./components/breadcrumbs";
 @forward "./components/content";
-@forward "./components/copy";
-@forward "./components/highlight";
 @forward "./components/last-updated";
 @forward "./components/skip-to-content";
 @forward "./components/tags";
@@ -50,5 +48,3 @@
 // 9 -- Vendor (3rd-party css)
 
 // 10 -- Overrides (overrides, mainly intended for 3rd-party css)
-
-@forward "./overrides/astro-code";
