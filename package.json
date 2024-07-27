@@ -19,6 +19,7 @@
     "autoprefixer": "^10.4.17",
     "cssnano": "^7.0.1",
     "dayjs": "^1.11.10",
-    "sass": "^1.71.1"
+    "sass": "^1.71.1",
+    "typescript": "^5.5.4"
   }
 }
